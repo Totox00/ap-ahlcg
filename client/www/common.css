@@ -1,0 +1,243 @@
+main {
+  width: 100%;
+  height: 60vh;
+  display: grid;
+  grid-template-areas: "cc sc as ar" "bt bt as ar";
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  grid-template-rows: 1fr 4rem;
+}
+
+#campaign-col {
+  grid-area: cc;
+  overflow-y: scroll;
+}
+
+#scenario-col {
+  grid-area: sc;
+  overflow-y: scroll;
+}
+
+#campaign-col > li,
+#scenario-col > li {
+  list-style-type: none;
+}
+
+#active-rules h3 {
+  text-align: center;
+}
+
+.selected {
+  background-color: purple;
+  color: white;
+}
+
+#active-scenario {
+  grid-area: as;
+  overflow-y: scroll;
+}
+
+#active-rules {
+  grid-area: ar;
+  overflow-y: scroll;
+}
+
+#buttons {
+  grid-area: bt;
+  display: flex;
+  flex-direction: row;
+}
+
+#buttons > button {
+  flex: 1;
+}
+
+#disconnect {
+  background-color: cyan;
+}
+
+#goal.available {
+  background-color: gold;
+}
+
+.goaled {
+  background-color: gold;
+}
+
+.goaled.selected {
+  background-color: purple;
+  color: gold;
+}
+
+.desc {
+  font-size: smaller;
+}
+
+.self,
+.progression {
+  color: magenta;
+}
+
+.trap {
+  color: red;
+}
+
+.entrance {
+  color: lightblue;
+}
+
+.useful {
+  color: darkblue;
+}
+
+.filler {
+  color: cyan;
+}
+
+.location {
+  color: lightgreen;
+}
+
+.player {
+  color: orange;
+}
+
+*[hidden] {
+  display: none !important;
+}
+
+*[hidden] * {
+  display: none !important;
+}
+
+@font-face {
+  font-family: "thronesdb";
+  src: url("./fonts/arkham-icons.otf");
+  src:
+    url("./fonts/arkham-icons.otf") format("opentype"),
+    url("./fonts/arkham-icons.ttf") format("truetype"),
+    url("./fonts/arkham-icons.woff") format("woff"),
+    url("./fonts/arkham-icons.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: "thronesdb";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-reaction:before {
+    content: "!"
+}
+
+.icon-fast:before,.icon-free:before {
+    content: "j"
+}
+
+.icon-eldersign:before,.icon-elder_sign:before {
+    content: "o"
+}
+
+.icon-lightning:before {
+    content: "j"
+}
+
+.icon-action:before {
+    content: "i"
+}
+
+.icon-strength:before,.icon-combat:before {
+    content: "c"
+}
+
+.icon-agility:before {
+    content: "a"
+}
+
+.icon-will:before,.icon-willpower:before {
+    content: "p"
+}
+
+.icon-lore:before,.icon-intellect:before {
+    content: "b"
+}
+
+.icon-wild:before {
+    content: "?";
+    font-weight: bold;
+    padding-right: 2px
+}
+
+.icon-unique:before {
+    content: "s";
+    font-size: 1.1em
+}
+
+.icon-elder_thing:before {
+    content: "n"
+}
+
+.icon-skull:before {
+    content: "k"
+}
+
+.icon-frost:before {
+    content: "x"
+}
+
+.icon-seal_a:before {
+    content: "1"
+}
+
+.icon-seal_b:before {
+    content: "=2"
+}
+
+.icon-seal_c:before {
+    content: "3"
+}
+
+.icon-seal_d:before {
+    content: "4"
+}
+
+.icon-seal_e:before {
+    content: "5"
+}
+
+.icon-auto_fail:before {
+    content: "m"
+}
+
+.icon-cultist:before {
+    content: "l"
+}
+
+.icon-tablet:before {
+    content: "q"
+}
+
+.icon-bless:before {
+    content: "v"
+}
+
+.icon-curse:before {
+    content: "w"
+}
+
+.icon-per_investigator:before {
+    content: "u";
+    vertical-align: top;
+    font-size: 12px
+}
+
+.icon-null:before {
+    content: "t"
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="./common.css" rel="stylesheet" />
+    <script type="module" src="index.js" defer></script>
+    <title>Arkham Horror The Card Game</title>
+  </head>
+  <body>
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <form id="conn-info">
+      <label for="server">Server:</label>
+      <input id="server" name="server" type="text" value="archipelago.gg" />
+      <label for="port">Port:</label>
+      <input id="port" name="port" type="number" value="38281" min="1" max="65535" />
+      <label for="slot">Slot:</label>
+      <input id="slot" name="slot" type="text" value="Player" />
+      <label for="password">Password:</label>
+      <input id="password" name="password" type="text" />
+      <input type="submit" value="Connect" />
+    </form>
+    <main id="client" hidden>
+      <ul id="campaign-col"></ul>
+      <ul id="scenario-col"></ul>
+      <div id="active-scenario"></div>
+      <div id="active-rules"></div>
+      <div id="buttons">
+        <button id="disconnect">Disconnect</button>
+        <button id="goal">Goal</button>
+      </div>
+    </main>
+    <ul id="msg-buffer" class="clear"></ul>
+  </body>
+</html>

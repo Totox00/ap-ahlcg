@@ -1,0 +1,45 @@
+workspace = { members = ["cardcode", "generate_data", "utils"] }
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+rust_analyzer = []
+
+[dependencies]
+wasm-bindgen = "0.2.92"
+web-sys = { version = "0.3.69", features = [
+    "Storage",
+    "Window",
+    "Navigator",
+    "StorageManager",
+    "File",
+    "FileSystemDirectoryHandle",
+    "FileSystemFileHandle",
+    "FileSystemGetDirectoryOptions",
+    "FileSystemDirectoryHandle",
+    "FileSystemGetFileOptions",
+    "TextDecoder",
+    "FileSystemWritableFileStream",
+    "Document",
+    "Element",
+    "HtmlCollection",
+    "DomTokenList",
+    "console",
+  ] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_repr = "0.1"
+num = "0.4"
+num-derive = "0.4"
+num-traits = "0.2"
+wasm-bindgen-futures = "0.4.45"
+generate_data = { path = "generate_data" }
+utils = { path = "utils" }
+cardcode = { path = "cardcode" }

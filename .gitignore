@@ -1,0 +1,9 @@
+/client/target
+/client/release
+/client/Id.py
+/client/Data.py
+/client/generate_data/src/cards.json
+/ahlcg/Id.py
+/ahlcg/Data.py
+/client/www/ahlcg.apworld
+ahlcg.apworld

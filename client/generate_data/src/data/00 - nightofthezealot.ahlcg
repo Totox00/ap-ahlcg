@@ -1,0 +1,152 @@
+campaign Night of the Zealot
+xp 20
+cards 01117
+unlock Hallway Exits
+unlock Barrier Removed
+unlock "Wolf-Man" Drew
+unlock Herman Collins
+unlock Peter Warren
+unlock Victoria Devereux
+unlock Ruth Turner
+unlock The Masked Hunter
+unlock Ritual Site
+unlock Umôrdhoth
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler -1 -1 -1 -1 It is past midnight
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -0 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -0 -1 -1 -5 Chaos Token
+filler -0 -0 -0 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Cultist Chaos Token
+filler -1 -1 -1 -1 Tablet Chaos Token
+
+scenario The Gathering
+in Night of the Zealot
+locations 01111 01112 01113 01114 01115
+begin 01111
+path 01111 01112
+path 01112 01113 01114 requires Hallway Exits
+path 01112 01115 requires Barrier Removed
+enemy 01116 requires Hallway Exits
+enemy 01118 requires Hallway Exits
+enemy 01119 requires Hallway Exits
+special 01117 requires Barrier Removed
+description Take control of Lita Chantler
+
+lock Hallway Exits
+in The Gathering
+neg_rule Investigators may not enter the Attic or the Cellar.
+
+lock Barrier Removed
+in The Gathering
+rule Investigators may advance act 2 without spending clues.
+neg_rule Investigators may not advance act 2.
+
+scenario The Midnight Masks
+in Night of the Zealot
+always
+Set every enemy from the Cult of Umôrdhoth encounter set aside, out of play.
+When agenda 1a advances, set The Masked Hunter aside, out of play.
+The <action> ability of act 1a is replaced with:
+<action> The investigators spend 2 clues per investigator, as a group: Send the next Cultist check.
+
+locations 01124 01125 01126 01127 01128 01129 01130 01131 01132 01133 01134
+begin 01124 01125 01126 01127 01128 01129 01130 01131 01132 01133 01134
+enemy 01137 requires "Wolf-Man" Drew
+enemy 01138 requires Herman Collins
+enemy 01139 requires Peter Warren
+enemy 01140 requires Victoria Devereux
+enemy 01141 requires Ruth Turner
+enemy 01121b requires The Masked Hunter
+special 01123
+name Cultist 1
+special 01123
+name Cultist 2
+special 01123
+name Cultist 3
+special 01123
+name Cultist 4
+special 01123
+name Cultist 5
+
+lock "Wolf-Man" Drew
+in The Midnight Masks
+rule Act 1a gains: <action>: Put the set aside "Wolf-Man" Drew enemy into play. (Group limit once per game)
+
+lock Herman Collins
+in The Midnight Masks
+rule Act 1a gains: <action>: Put the set aside Herman Collins enemy into play. (Group limit once per game)
+
+lock Peter Warren
+in The Midnight Masks
+rule Act 1a gains: <action>: Put the set aside Peter Warren enemy into play. (Group limit once per game)
+
+lock Victoria Devereux
+in The Midnight Masks
+rule Act 1a gains: <action>: Put the set aside Victoria Devereux enemy into play. (Group limit once per game)
+
+lock Ruth Turner
+in The Midnight Masks
+rule Act 1a gains: <action>: Put the set aside Ruth Turner enemy into play. (Group limit once per game)
+
+lock The Masked Hunter
+in The Midnight Masks
+rule While it is agenda 2, Act 1a gains: <action>: Put the set aside The Masked Hunter enemy into play. (Group limit once per game)
+
+scenario The Devourer Below
+in Night of the Zealot
+level 6
+locations 01149 01150 01151 01152 01153 01154 01155 01156
+begin 01149 01150 01151 01152 01153 01154 01155
+path 01149 01156 requires Ritual Site
+enemy 01175 2
+enemy 01177 2
+enemy 01179
+special 01148 requires Ritual Site
+name Resolution 1
+goal
+special 01145 requires Umôrdhoth
+name Resolution 2
+goal
+special 01157 requires Umôrdhoth & Lita Chantler
+name Resolution 3
+
+lock Ritual Site
+in The Devourer Below
+neg_rule Investigators cannot enter the Ritual Site.
+
+lock Umôrdhoth
+in The Devourer Below
+neg_rule if Umôrdhoth would enter play, each investigator is driven insane.
+
+lock "Wolf-Man" Drew
+in The Devourer Below
+neg_rule "Wolf-Man" Drew is listed under "Cultists Who Got Away".
+
+lock Herman Collins
+in The Devourer Below
+neg_rule Herman Collins is listed under "Cultists Who Got Away".
+
+lock Peter Warren
+in The Devourer Below
+neg_rule Peter Warren is listed under "Cultists Who Got Away".
+
+lock Victoria Devereux
+in The Devourer Below
+neg_rule Victoria Devereux is listed under "Cultists Who Got Away".
+
+lock Ruth Turner
+in The Devourer Below
+neg_rule Ruth Turner is listed under "Cultists Who Got Away".
+
+lock The Masked Hunter
+in The Devourer Below
+neg_rule The Masked Hunter is listed under "Cultists Who Got Away".
