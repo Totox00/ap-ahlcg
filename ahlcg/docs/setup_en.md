@@ -1,19 +1,18 @@
 # Arkham Horror The Card Game Setup Guide
 
-## Required Software
+## Requirements
 
-- Access to a way to play Arkham Horror The Card Game, such as physical cardboard and ink or through Tabletop Simulator
+- Arkham Horror The Card Game
 - [Arkham Horror The Card Game Browser Client (Requires no installation)](https://totox00.github.io/ap-ahlcg/index.html)
 
 ## General Concept
 
-Since Arkham Horror The Card Game can be played as a board game or on Tabletop Simulator, the client does not connect with the game itself.
+Since Arkham Horror The Card Game is a card game, the client does not connect with the game itself.
 Instead, it will indicate what items you have received and what locations are possible, and allow you to send those locations when you have accomplished them.
 
 ## Installing the Archipelago mod
 
-The only client that currently supports all features is the browser based client linked above, which requires no installation.
-Clients that interact with the game directly may be added in the future.
+The client runs entirely within the browser, so requires no installation.
 
 ## Joining a MultiWorld Game
 
