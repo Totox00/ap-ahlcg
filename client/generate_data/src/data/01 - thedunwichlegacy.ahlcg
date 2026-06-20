@@ -1,0 +1,306 @@
+campaign The Dunwich Legacy
+xp 40
+cards 02040 02061 02080 02140 02217 02218
+unlock "Jazz" Mulligan
+unlock Experiment Weakness
+unlock High Roller
+unlock Naomi's Support
+unlock Museum Key
+unlock Halls Key
+unlock Harold Walsted
+unlock Adam Lynch
+unlock Key to the Chamber
+unlock Powder of Ibn-Ghazi
+unlock Esoteric Formula
+unlock A Sacrifice Made
+unlock The Path to the Peak
+unlock The Key and the Gate
+unlock The Edge of the Universe
+unlock Tear Through Time
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -0 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -0 -1 -1 -5 Chaos Token
+filler -0 -0 -0 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Cultist Chaos Token
+filler -1 -1 -1 -2 Tablet Chaos Token
+filler -1 -1 -1 -2 Elder Thing Chaos Token
+filler -1 -1 -1 -1 Across Space and Time
+filler -1 -1 -1 -1 The investigators were delayed on their way to Dunwich
+filler -1 -1 -1 -1 Madness/Injury/Pact Basic Weakness
+filler -1 -1 -1 -1 The investigators failed to save the students
+
+scenario Extracurricular Activity
+in The Dunwich Legacy
+always
+Always use Faculty Offices (The Night is Still Young).
+You count as having completed The House Always Wins.
+
+locations 02048 02049 02050 02051 02053 02056 02052 02054 02057
+begin 02048 02049 02050 02051 02053 02056
+path 02051 02052 requires "Jazz" Mulligan
+path 02053 02054 requires "Jazz" Mulligan
+path 02056 02057 requires "Jazz" Mulligan
+enemy 01177 2
+enemy 02058 requires Experiment Weakness
+enemy 02087
+
+lock "Jazz" Mulligan
+in Extracurricular Activity
+neg_rule The act may not be advanced
+
+lock Experiment Weakness
+in Extracurricular Activity
+neg_rule The Experiment cannot take damage or be defeated.
+
+scenario The House Always Wins
+in The Dunwich Legacy
+always
+Investigators may not use the <reaction> ability of act 1a.
+The House Always Wins counts as the first scenario of the campaign.
+
+locations 02070 02071 02072 02073 02074 02075 02076 02077
+begin 02070 02071 02072 02073
+path 02073 02074 requires High Roller
+path 02074 02075 02076 02077
+enemy 02078
+enemy 02104
+special 02080 requires High Roller
+description Resign with Dr. Francis Morgan
+
+lock High Roller
+in The House Always Wins
+neg_rule Investigators cannot enter the Darkened Hall.
+
+scenario The Miskatonic Museum
+in The Dunwich Legacy
+locations 02126 02127 02129 02131 02132 02133 02134 02135 02136 02137
+begin 02126
+path 02126 02127 requires Museum Key
+path 02127 02129 02131
+path 02127 02132 02133 02134 02135 02136 02137 requires Halls Key
+
+lock Museum Key
+in The Miskatonic Museum
+neg_rule Players 
+rule Reveal the Museum Entrance
+
+lock Halls Key
+in The Miskatonic Museum
+neg_rule Investigators cannot use the <action> ability of Museum Halls.
+
+lock Harold Walsted
+in The Miskatonic Museum
+neg_rule If Harold Walsted would enter play, he doesn't.
+
+lock Adam Lynch
+in The Miskatonic Museum
+neg_rule If Adam Lynch would enter play, he doesn't.
+
+scenario The Essex County Express
+in The Dunwich Legacy
+always Do not add any chaos token to the chaos bag during setup.
+locations 02167 02172 02174 02175
+begin 02167 02172 02174 02175
+enemy 02183 2
+
+scenario Blood on the Altar
+in The Dunwich Legacy
+level 6
+always
+Only include Zebulon Whateley and Earl Sawyer in the deck of potential sacrifices if they are listed as "was kidnapped".
+When placing encounter cards beneath locations, include a fourth card from the top of the encounter deck instead of the set-aside Key to the Chamber.
+
+locations 02201 02202 02204 02206 02208 02210 02212 02214
+begin 02201 02202 02204 02206 02208 02210 02212
+path 02201 02214 requires Key to the Chamber
+enemy 02216 requires Key to the Chamber
+
+lock Key to the Chamber
+in Blood on the Altar
+rule The lead investigator takes control of the set-aside Key to the Chamber.
+
+lock Naomi's Support
+in Blood on the Altar
+neg_rule The O'Bannion gang has a bone to pick with the investigators.
+
+lock Professor Warren Rice
+in Blood on the Altar
+neg_rule Professor Warren Rice was kidnapped.
+
+lock Dr. Francis Morgan
+in Blood on the Altar
+neg_rule Dr. Francis Morgan was kidnapped.
+
+lock Dr. Henry Armitage
+in Blood on the Altar
+neg_rule Dr. Henry Armitage was kidnapped.
+
+lock Earl Sawyer
+in Blood on the Altar
+neg_rule Earl Sawyer was kidnapped.
+
+lock Zebulon Whateley
+in Blood on the Altar
+neg_rule Zebulon Whateley was kidnapped.
+
+scenario Undimensioned and Unseen
+in The Dunwich Legacy
+level 12
+always
+Do not search your collection for an additional basic Madness, Injury, or Pact weakness.
+Always set up Broods of Yog-Sothoth as if no names are listed under "Sacrificed to Yog-Sothoth"
+
+locations 02243 02244 02247 02248 02250 02252
+begin 02243 02244 02247 02248 02250 02252
+enemy 02255 5
+
+lock Powder of Ibn-Ghazi
+in Undimensioned and Unseen
+rule A player may put Powder of Ibn-Ghazi into play.
+
+lock Esoteric Formula
+in Undimensioned and Unseen
+neg_rule The act cannot advance.
+rule Investigators may advance act 1a without spending clues.
+
+lock Professor Warren Rice
+in Undimensioned and Unseen
+rule Professor Warren Rice survived the Dunwich Legacy.
+neg_rule Professor Warren Rice is listed under "Sacrificed to Yog-Sothoth".
+
+lock Dr. Francis Morgan
+in Undimensioned and Unseen
+rule Dr. Francis Morgan survived the Dunwich Legacy.
+neg_rule Dr. Francis Morgan is listed under "Sacrificed to Yog-Sothoth".
+
+lock Dr. Henry Armitage
+in Undimensioned and Unseen
+rule Dr. Henry Armitage survived the Dunwich Legacy.
+neg_rule Dr. Henry Armitage is listed under "Sacrificed to Yog-Sothoth".
+
+lock Earl Sawyer
+in Undimensioned and Unseen
+rule Earl Sawyer survived the Dunwich Legacy.
+neg_rule Earl Sawyer is listed under "Sacrificed to Yog-Sothoth".
+
+lock Zebulon Whateley
+in Undimensioned and Unseen
+rule Zebulon Whateley survived the Dunwich Legacy.
+neg_rule Zebulon Whateley is listed under "Sacrificed to Yog-Sothoth".
+
+scenario Where Doom Awaits
+in The Dunwich Legacy
+level 15
+always Do not add any chaos token to the chaos bag during setup.
+locations 02282 02283 02284 02285 02286 02287 02288 02289 02290 02291 02292
+begin 02282 02285 02286 02287 02288
+path 02282 02283 02289 02290 02291 02292 requires A Sacrifice Made
+path 02283 02284 requires The Path to the Peak
+enemy 02104 requires Undimensioned and Unseen & Key to the Chamber
+enemy 02293 requires A Sacrifice Made & The Path to the Peak
+enemy 02087
+enemy 02295 requires A Sacrifice Made
+special 02287
+name All Doom Removed
+
+lock A Sacrifice Made
+in Where Doom Awaits
+neg_rule The act cannot advance.
+
+lock The Path to the Peak
+in Where Doom Awaits
+neg_rule Investigators cannot enter Sentinel Peak.
+
+lock Undimensioned and Unseen & Key to the Chamber
+in Where Doom Awaits
+rule The investigators put Silas Bishop out of his misery.
+
+lock Naomi's Support
+in Where Doom Awaits
+rule Naomi has the investigators' backs.
+
+lock The Necronomicon (Olaus Wormius Translation)
+in Where Doom Awaits
+neg_rule The investigators failed to recover the Necronomicon.
+
+lock Professor Warren Rice
+in Where Doom Awaits
+neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
+
+lock Dr. Francis Morgan
+in Where Doom Awaits
+neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
+
+lock Dr. Henry Armitage
+in Where Doom Awaits
+neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
+
+lock Earl Sawyer
+in Where Doom Awaits
+neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
+
+lock Zebulon Whateley
+in Where Doom Awaits
+neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
+
+scenario Lost in Time and Space
+in The Dunwich Legacy
+level 18
+locations 02320 02321 02322 02324 02325 02326 02327 02328
+begin 02320 02324 02325 02326 02327 02328
+path 02320 02321 requires The Edge of the Universe
+path 02321 02322 requires Tear Through Time
+enemy 01177 2
+enemy 02104
+special 02319 requires The Edge of the Universe & Tear Through Time
+name Resolution 1
+goal
+special 02315 requires The Key and the Gate
+name Resolution 3
+goal
+
+lock The Edge of the Universe
+in Lost in Time and Space
+neg_rule Investigators cannot enter The Edge of the Universe
+
+lock Tear Through Time
+in Lost in Time and Space
+neg_rule Investigators cannot enter Tear Through Time
+
+lock The Key and the Gate
+in Lost in Time and Space
+neg_rule If Yog-Sothoth would enter play, each investigator is driven insane.
+
+lock Professor Warren Rice
+in Lost in Time and Space
+rule Professor Warren Rice survived the Dunwich Legacy.
+neg_rule Professor Warren Rice is listed under "Sacrificed to Yog-Sothoth".
+
+lock Dr. Francis Morgan
+in Lost in Time and Space
+rule Dr. Francis Morgan survived the Dunwich Legacy.
+neg_rule Dr. Francis Morgan is listed under "Sacrificed to Yog-Sothoth".
+
+lock Dr. Henry Armitage
+in Lost in Time and Space
+rule Dr. Henry Armitage survived the Dunwich Legacy.
+neg_rule Dr. Henry Armitage is listed under "Sacrificed to Yog-Sothoth".
+
+lock Earl Sawyer
+in Lost in Time and Space
+rule Earl Sawyer survived the Dunwich Legacy.
+neg_rule Earl Sawyer is listed under "Sacrificed to Yog-Sothoth".
+
+lock Zebulon Whateley
+in Lost in Time and Space
+rule Zebulon Whateley survived the Dunwich Legacy.
+neg_rule Zebulon Whateley is listed under "Sacrificed to Yog-Sothoth".

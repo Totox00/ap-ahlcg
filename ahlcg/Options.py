@@ -9,7 +9,7 @@ from worlds.ahlcg.Data import campaigns, scenarios
 class IncludedCampaigns(OptionSet):
     """All campaigns that will be included"""
     display_name = "Included Campaigns"
-    default = frozenset(["Night of the Zealot"])
+    default = frozenset(campaigns.keys())
     valid_keys = campaigns.keys()
 
 

@@ -72,6 +72,10 @@ impl State {
         self.campaign_state(campaign).scenarios.iter().copied()
     }
 
+    pub fn xp(&mut self, campaign: &'static str) -> i64 {
+        self.campaign_state(campaign).xp
+    }
+
     pub fn cards(&mut self, campaign: &'static str) -> impl Iterator<Item = (Code, i64)> {
         self.campaign_state(campaign).cards.iter().map(|(code, count)| (*code, *count))
     }

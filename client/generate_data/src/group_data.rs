@@ -1,6 +1,6 @@
 use std::{
     collections::HashMap,
-    fs::File,
+    fs::{File, read_dir},
     io::{BufRead, BufReader},
     iter::once,
 };
@@ -46,14 +46,20 @@ pub fn group_data(cards: &Cards) -> Data {
 
     let mut current = Fields::default();
 
-    let files = [std::path::Path::new(file!()).parent().unwrap().join("data").join("00 - nightofthezealot.ahlcg")];
+    let mut files: Vec<_> = read_dir(std::path::Path::new(file!()).parent().unwrap().join("data"))
+        .expect("Failed to read data directory")
+        .flatten()
+        .map(|entry| (entry.path(), ustr(entry.file_name().to_str().expect("Invalid data file name"))))
+        .collect();
 
-    let mut lines = files.iter().flat_map(|file_name| {
-        BufReader::new(File::open(file_name).expect("Failed to open file"))
+    files.sort_unstable_by_key(|(_, name)| *name);
+
+    let mut lines = files.into_iter().flat_map(|(path, name)| {
+        BufReader::new(File::open(path).expect("Failed to open file"))
             .lines()
             .zip(1..)
-            .map(move |(line, i)| (line.unwrap_or_else(|err| panic!("Failed to read line {i}: {err:?}")), i, file_name))
-            .chain(once((String::new(), 0, file_name)))
+            .map(move |(line, i)| (line.unwrap_or_else(|err| panic!("Failed to read line {i}: {err:?}")), i, name))
+            .chain(once((String::new(), 0, name)))
     });
 
     while let Some((line, i, file)) = lines.next() {

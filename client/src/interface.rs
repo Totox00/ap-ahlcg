@@ -153,6 +153,7 @@ impl Interface {
         if let Some(scenario) = get_scenario(self.selected_scenario) {
             let mut buf = String::new();
 
+            let _ = write!(&mut buf, "<p>Received XP: {}</p>", state.xp(self.selected_campaign));
             let _ = write!(&mut buf, "<p>{}</p>", scenario.always);
 
             for lock in scenario.locks {
@@ -188,7 +189,11 @@ impl Interface {
                 let _ = write!(&mut buf, "<h3>Received Filler</h3><ul>{}</ul>", filler_str);
             }
 
-            self.rules.set_inner_html(&buf.replace("\n", "<br />").replace("<action>", "<span class=\"icon-action\" title=\"Action\"></span>"));
+            self.rules.set_inner_html(
+                &buf.replace("\n", "<br />")
+                    .replace("<action>", "<span class=\"icon-action\" title=\"Action\"></span>")
+                    .replace("<reaction>", "<span class=\"icon-reaction\" title=\"Reaction\"></span>"),
+            );
         }
     }
 

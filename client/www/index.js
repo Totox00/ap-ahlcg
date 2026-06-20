@@ -9,16 +9,16 @@ const msgBuffer = document.getElementById("msg-buffer");
 const clientElem = document.getElementById("client");
 const clear = document.getElementsByClassName("clear");
 
-server.value = localStorage.getItem("server") ?? "archipelago.gg";
-port.value = localStorage.getItem("port") ?? "38281";
-slot.value = localStorage.getItem("slot") ?? "Player";
+server.value = localStorage.getItem("ap-ahlcg-server") ?? "archipelago.gg";
+port.value = localStorage.getItem("ap-ahlcg-port") ?? "38281";
+slot.value = localStorage.getItem("ap-ahlcg-slot") ?? "Player";
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  localStorage.setItem("server", server.value);
-  localStorage.setItem("port", port.value);
-  localStorage.setItem("slot", slot.value);
+  localStorage.setItem("ap-ahlcg-server", server.value);
+  localStorage.setItem("ap-ahlcg-port", port.value);
+  localStorage.setItem("ap-ahlcg-slot", slot.value);
 
   tryConnect(e);
 });
