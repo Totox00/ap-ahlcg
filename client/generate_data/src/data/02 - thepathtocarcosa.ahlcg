@@ -1,0 +1,227 @@
+campaign The Path to Carcosa
+xp 40
+cards 03142 03143 03227
+unlock Lobby Keys
+unlock Backstage Keys
+unlock Mr. Peabody
+unlock Asylum Keys
+unlock Wider Paris
+unlock Church Key
+unlock Chapel Guide
+unlock Tower Key
+unlock Sebastien Moreau Interviewed
+unlock Constance Dumaine Interviewed
+unlock Jordan Perry Interviewed
+unlock Ishimaru Haruko Interviewed
+unlock Ashleigh Clarke Interviewed
+unlock Sebastien Moreau Slain
+unlock Constance Dumaine Slain
+unlock Jordan Perry Slain
+unlock Ishimaru Haruko Slain
+unlock Ashleigh Clarke Slain
+unlock The Secret
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -2 -2 Skull Chaos Token
+filler -1 -1 -1 -1 Cultist/Tablet/Elder Thing Chaos Token
+filler -1 -1 -1 -1 Heed the Warning
+filler -1 -1 -1 -1 Madness/Pact/Cultist/Detective Basic Weakness
+
+scenario Curtain Call
+in The Path to Carcosa
+locations 03049 03050 03051 03052 03053 03054 03055 03056 03057 03058
+begin 03049 03050 03051 03052
+path 03050 03053 03054 03055 requires Lobby Keys
+path 03052 03056 03057 03058 requires Backstage Keys
+enemy 03060
+enemy 03099
+special 03048 requires Lobby Keys|Backstage Keys
+name Resign
+
+lock Lobby Keys
+in Curtain Call
+neg_rule Investigators may not enter Lobby Doorway locations.
+
+lock Backstage Keys
+in Curtain Call
+neg_rule Investigators may not enter Backstage Doorway locations.
+
+scenario The Last King
+in The Path to Carcosa
+locations 03070
+begin 03070
+special 03076a
+name Interviewed Constance
+special 03077
+name Interviewed Jordan
+special 03078
+name Interviewed Haruko
+special 03079
+name Interviewed Sebastien
+special 03080
+name Interviewed Ashleigh
+
+scenario Echoes of the Past
+in The Path to Carcosa
+locations 03128 03129 03130 03133 03134 03137 03139
+begin 03128 03129 03130 03133 03134 03137
+path 03128 03139 requires Mr. Peabody
+enemy 03099
+enemy 03140 requires Mr. Peabody
+
+lock Mr. Peabody
+in Echoes of the Past
+rule Choose an investigator to take control of the set-aside Mr. Peabody.
+neg_rule Remove the set-aside Mr. Peabody from the game.
+
+lock Sebastien Moreau Interviewed
+in Echoes of the Past
+rule Sebastien Moreau is listed under "VIPs Interviewed".
+
+lock Sebastien Moreau Slain
+in Echoes of the Past
+rule Sebastien Moreau is listed under "VIPs Slain".
+
+scenario The Unspeakable Oath
+in The Path to Carcosa
+level 6
+always Do not add any chaos token to the chaos bag during setup.
+locations 03169 03171 03172 03173 03174 03175 03176 03177 03178 03179 03180 03181
+begin 03169 03171 03173 03174 03175
+path 03169 03172 03176 03177 03178 03179 03180 03181 requires Asylum Keys
+enemy 01175 2 requires Asylum Keys
+enemy 03088 requires Asylum Keys
+special 03167 requires Asylum Keys
+name Resign
+special 03182a requires Asylum Keys
+description Resign with Daniel Chesterfield
+
+lock Clasp of Black Onyx
+in The Unspeakable Oath
+rule You took the onyx clasp.
+
+lock Asylum Keys
+in The Unspeakable Oath
+neg_rule The act cannot advance.
+rule Advance directly to act 2a.
+
+lock Constance Dumaine Interviewed
+in The Unspeakable Oath
+rule Constance Dumaine is listed under "VIPs Interviewed".
+
+lock Constance Dumaine Slain
+in The Unspeakable Oath
+rule Constance Dumaine is listed under "VIPs Slain".
+
+scenario A Phantom of Truth
+in The Path to Carcosa
+level 6
+always Instead of reading Dream 1, skip to Awakening.
+locations 03208 03209 03211 03212 03214 03215 03216 03217 03219 03220
+begin 03208 03209 03212 03214 03217 03219
+path 03208 03211 03215 03216 03220
+enemy 01175 2
+special 03206
+special 03207
+
+lock Wider Paris
+in A Phantom of Truth
+neg_rule Investigators cannot enter non-Rail locations.
+
+lock Jordan Perry Interviewed
+in A Phantom of Truth
+rule Jordan Perry is listed under "VIPs Interviewed".
+
+lock Jordan Perry Slain
+in A Phantom of Truth
+rule Jordan Perry is listed under "VIPs Slain".
+
+scenario The Pallid Mask
+in The Path to Carcosa
+level 12
+locations 03247 03249 03250 03251 03252 03253 03254 03255 03257
+begin 03247 03249 03250 03251 03252 03253 03254 03255 03257
+enemy 03241b
+special 03245
+special 03246
+
+lock Ishimaru Haruko Interviewed
+in The Pallid Mask
+rule Ishimaru Haruko is listed under "VIPs Interviewed".
+
+lock Ishimaru Haruko Slain
+in The Pallid Mask
+rule Ishimaru Haruko is listed under "VIPs Slain".
+
+scenario Black Stars Rise
+in The Path to Carcosa
+level 15
+always Do not add any chaos token to the chaos bag or additional basic weakness to your deck during setup.
+locations 03283 03284 03285 03287 03289 03291 03292 03294 03295 03296 03297 03298 03299
+begin 03283 03284 03285 03287 03289
+path 03289 03291 03292 03294 03295 requires Church Key
+path 03291 03296 03297 requires Chapel Guide
+path 03292 03298 03299 requires Tower Key
+enemy 03088 requires Church Key & Chaper Guide | Church Key & Tower Key
+special 03281 requires Church Key & Chapel Guide
+special 03282 requires Church Key & Tower Key
+special 03294 requires Church Key
+name Find a guide
+special 03295 requires Church Key
+name Find the tower key
+
+lock Church Key
+in Black Stars Rise
+neg_rule Investigators cannot enter the Abbey Church.
+rule Reveal the Abbey Church.
+
+lock Chapel Guide
+in Black Stars Rise
+neg_rule Investigators cannot enter the Chapel of St. Aubert.
+rule Reveal the Chapel of St. Aubert.
+
+lock Tower Key
+in Black Stars Rise
+neg_rule Investigators cannot enter the Abbey Tower.
+rule Reveal the Abbey Tower.
+
+lock Ashleigh Clarke Interviewed
+in Black Stars Rise
+rule Ashleigh Clarke is listed under "VIPs Interviewed".
+
+lock Ashleigh Clarke Slain
+in Black Stars Rise
+rule Ashleigh Clarke is listed under "VIPs Slain".
+
+scenario Dim Carcosa
+in The Path to Carcosa
+level 18
+locations 03325 03326a 03327a 03328a 03329a 03330 03331
+begin 03325 03326a 03327a 03328a 03329a 03330 03331
+enemy 01175 2
+enemy 03088
+enemy 03099
+special 03324
+name Resolution 1 requires The Secret
+goal
+special 03324
+name Resolution 2 requires The Secret
+goal
+special 03324
+name Resolution 3 requires The Secret
+goal
+
+lock The Secret
+in Dim Carcosa
+rule You "know the secret".
+neg_rule Palace of the King cannot be flipped over.

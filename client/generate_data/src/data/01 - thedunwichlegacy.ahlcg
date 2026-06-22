@@ -1,6 +1,6 @@
 campaign The Dunwich Legacy
 xp 40
-cards 02040 02061 02080 02140 02217 02218
+cards 02040 02061 02080 02140 02178 02217 02218
 unlock "Jazz" Mulligan
 unlock Experiment Weakness
 unlock High Roller
@@ -23,17 +23,16 @@ filler 1 1 0 0 +1 Chaos Token
 filler 1 2 1 0 0 Chaos Token
 filler -2 1 1 0 -1 Chaos Token
 filler -1 -2 2 1 -2 Chaos Token
-filler -0 -1 -1 2 -3 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
 filler -0 -1 -1 -1 -4 Chaos Token
-filler -0 -0 -1 -1 -5 Chaos Token
-filler -0 -0 -0 -1 -6 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
 filler -0 -0 -0 -1 -7 Chaos Token
 filler -0 -0 -0 -0 -8 Chaos Token
 filler -1 -1 -1 -1 Skull Chaos Token
 filler -1 -1 -1 -1 Cultist Chaos Token
 filler -1 -1 -1 -2 Tablet Chaos Token
 filler -1 -1 -1 -2 Elder Thing Chaos Token
-filler -1 -1 -1 -1 Across Space and Time
 filler -1 -1 -1 -1 The investigators were delayed on their way to Dunwich
 filler -1 -1 -1 -1 Madness/Injury/Pact Basic Weakness
 filler -1 -1 -1 -1 The investigators failed to save the students
@@ -156,7 +155,7 @@ scenario Undimensioned and Unseen
 in The Dunwich Legacy
 level 12
 always
-Do not search your collection for an additional basic Madness, Injury, or Pact weakness.
+Do not add any additional basic weakness to your deck during setup.
 Always set up Broods of Yog-Sothoth as if no names are listed under "Sacrificed to Yog-Sothoth"
 
 locations 02243 02244 02247 02248 02250 02252

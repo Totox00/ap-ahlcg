@@ -15,10 +15,10 @@ pub enum LogicTerm {
 pub fn parse_logic(campaign: &str, str: &str) -> LogicTerm {
     if str.is_empty() {
         LogicTerm::True
-    } else if str.contains('&') {
-        LogicTerm::And(str.split('&').map(|str| parse_logic(campaign, str)).collect())
     } else if str.contains('|') {
         LogicTerm::Or(str.split('|').map(|str| parse_logic(campaign, str)).collect())
+    } else if str.contains('&') {
+        LogicTerm::And(str.split('&').map(|str| parse_logic(campaign, str)).collect())
     } else {
         LogicTerm::Unlock((ustr(campaign), ustr(&str.trim().escape_debug().to_string())))
     }
