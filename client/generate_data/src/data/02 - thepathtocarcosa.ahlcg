@@ -172,7 +172,7 @@ begin 03283 03284 03285 03287 03289
 path 03289 03291 03292 03294 03295 requires Church Key
 path 03291 03296 03297 requires Chapel Guide
 path 03292 03298 03299 requires Tower Key
-enemy 03088 requires Church Key & Chaper Guide | Church Key & Tower Key
+enemy 03088 requires Church Key & Chapel Guide | Church Key & Tower Key
 special 03281 requires Church Key & Chapel Guide
 special 03282 requires Church Key & Tower Key
 special 03294 requires Church Key
