@@ -1,0 +1,536 @@
+campaign The Forgotten Age
+xp 50
+cards 04051 04061 04102 04147 04148 04264
+unlock Provisions
+unlock Medicine
+unlock Rope
+unlock Blanket
+unlock Canteen
+unlock Torches
+unlock Compass
+unlock Map
+unlock Binoculars
+unlock Chalk
+unlock Pendant
+unlock Gasoline
+unlock Pocketknife
+unlock Pickaxe
+unlock Deeper Jungle
+unlock Ichtaca's Trust
+unlock Secret Passage
+unlock Alejandro's Trust
+unlock Ichtaca's Tale
+unlock The Relic
+unlock Alejandro
+unlock Ichtaca
+unlock Faith Restored
+unlock Beyond the Ruins
+unlock K'n-yan
+unlock Restricted Access
+unlock The process was successful
+unlock A Mind Recovered
+unlock Gateways to Other Times
+filler -1 -2 -2 -3 Physical Trauma
+filler -1 -2 -2 -3 Mental Trauma
+filler 1 1 1 1 Heal 1 Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Elder Thing Chaos Token
+filler -30 -30 -30 -30 Yig's Fury
+
+scenario The Untamed Wilds
+in The Forgotten Age
+locations 04050 04053 04069 04070 04071 04072 03073 04074 04075
+begin 04050 04069 04070 04071 04072 03073
+path 04050 04053 04074 04075 requires Deeper Jungle
+enemy 04052
+enemy 04084
+
+lock Map
+in The Untamed Wilds
+rule You have a map.
+
+lock Compass
+in The Untamed Wilds
+rule You have a compass.
+
+lock Canteen
+in The Untamed Wilds
+rule You have a canteen.
+
+lock Deeper Jungle
+in The Untamed Wilds
+neg_rule Ruins locations are not considered to be connected to any locations and vice versa.
+
+scenario The Doom of Eztli
+in The Forgotten Age
+locations 04060 04063 04064 04065 04066 04067 04068
+begin 04060 04063 04064 04065 04066
+path 04060 04067 04068 requires Secret Passage
+enemy 04084
+special 04061
+description Resign with the Relic of Ages.
+
+lock Blanket
+in The Doom of Eztli
+neg_rule Each investigator begins the scenario with 1 damage and 1 horror.
+
+lock Provisions
+in The Doom of Eztli
+neg_rule Each investigator begins the scenario with 3 fewer resources.
+
+lock Binoculars
+in The Doom of Eztli
+neg_rule Each investigator begins the scenario with 1 horror.
+
+lock Poisoned
+in The Doom of Eztli
+neg_rule Each investigator begins the scenario with 1 damage.
+
+lock Torches
+in The Doom of Eztli
+rule You have torches.
+
+lock Chalk
+in The Doom of Eztli
+rule You have chalk.
+
+lock Rope
+in The Doom of Eztli
+rule You have rope.
+
+lock Secret Passage
+in The Doom of Eztli
+neg_rule The Secret Passage location is not considered to be connected to any locations and vice versa.
+
+lock Ichtaca's Trust
+in The Doom of Eztli
+neg_rule Remove 1 Cultist token from the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in The Doom of Eztli
+rule Add 1 Tablet token to the chaos bag.
+
+scenario Threads of Fate
+in The Forgotten Age
+always
+Skip the Intro and skip directly to Setup.
+Only include an act deck if it is listed as an option below.
+
+locations 01125 01129 01130 01132 01134 04117b 04126b 04128b 04133b 04141 04142 04143
+begin 01125 01129 01130 01132 01134 04141 04142
+path 01125 04117b requires The Relic
+path 01125 04126b requires Alejandro
+path 01125 04128b requires Alejandro
+path 01125 04133b requires Ichtaca
+path 01125 04143 requires The Relic | Alejandro | Ichtaca
+enemy 04122b requires The Relic
+enemy 04130b requires Alejandro
+enemy 04137b requires Ichtaca
+special 04118b requires The Relic
+description Advance
+special 04123 requires The Relic
+special 04124 requires The Relic
+special 04125b requires Alejandro
+description Advance
+special 04131 requires Alejandro
+special 04132 requires Alejandro
+special 04134b requires Ichtaca
+description Advance
+special 04139 requires Ichtaca
+special 04140 requires Ichtaca
+special 04141
+name Kill some time
+
+lock The Relic
+in Threads of Fate
+rule You may use either setup variant of the "a/b" act deck as described under "Three Acts, Three Threads".
+
+lock Alejandro
+in Threads of Fate
+rule You may use either setup variant of the "c/d" act deck as described under "Three Acts, Three Threads".
+
+lock Ichtaca
+in Threads of Fate
+rule You may use either setup variant of the "e/f" act deck as described under "Three Acts, Three Threads".
+
+lock Ichtaca's Trust
+in Threads of Fate
+neg_rule Remove 1 Cultist token from the chaos bag.
+
+lock Ichtaca's Tale
+in Threads of Fate
+rule Add 1 Cultist token to the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in Threads of Fate
+neg_rule Remove 1 Tablet token from the chaos bag.
+
+lock Alejandro's Trust
+in Threads of Fate
+rule Add 1 Tablet token to the chaos bag.
+
+scenario The Boundary Beyond
+in The Forgotten Age
+level 6
+always
+Do not skip any sections of the scenario introduction.
+The Harbinger is still alive (0).
+
+locations 04175 04177 04178 04180 04183 04184
+begin 04175 04177 04178 04180 04183 04184
+enemy 04186
+enemy 04187
+special 04167
+name Resolution 1
+
+lock Ichtaca's Trust
+in The Boundary Beyond
+neg_rule Remove 1 Cultist token from the chaos bag.
+
+lock Ichtaca's Tale
+in The Boundary Beyond
+rule Add 1 Cultist token to the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in The Boundary Beyond
+neg_rule Remove 1 Tablet token from the chaos bag.
+
+lock Alejandro's Trust
+in The Boundary Beyond
+rule Add 1 Tablet token to the chaos bag.
+
+lock Ichtaca (The Forgotten Guardian)
+in The Boundary Beyond
+rule The investigators forged a bond with Ichtaca.
+neg_rule Ichtaca is in the dark.
+
+lock Relic of Ages (…A Device, of Some Sort)
+in The Boundary Beyond
+rule The investigators found the missing relic.
+neg_rule The relic is missing.
+
+lock Alejandro Vela (Renowned Historian)
+in The Boundary Beyond
+rule The investigators rescued Alejandro.
+neg_rule Alejandro is missing.
+
+lock Gasoline
+in The Boundary Beyond
+rule Do not read "Out of Gas".
+neg_rule Read "Out of Gas".
+
+scenario Heart of the Elders
+in The Forgotten Age
+level 12
+always
+0 Paths are known to you.
+Include all 3 Ruins locations in the exploration deck.
+Follow the resolution 1 instructions for the jungle watches.
+The Harbinger is still alive (0).
+If any investigator deck contains Relic of Ages, replace it with Relic of Ages (Forestalling the future).
+
+locations 04069 04070 04071 04072 03073 04074 04075 04206 04206b 04217 04218 04222 04223 04224 04225 04226 04227
+begin 04074 04075 04206 04218
+path 04206 04069 04070 04071 04072 03073 04217 requires Beyond the Ruins
+path 04206 04206b 04222 04223 04224 04225 04226 04227 requires Beyond the Ruins & K'n-yan
+enemy 04084
+enemy 04219 2
+special 04214
+name To Yoth
+
+lock Ichtaca's Trust
+in Heart of the Elders
+neg_rule Remove 1 Cultist token from the chaos bag.
+
+lock Ichtaca's Tale
+in Heart of the Elders
+rule Add 1 Cultist token to the chaos bag.
+
+lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored
+in Heart of the Elders
+rule Add 1 Cultist token to the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in Heart of the Elders
+neg_rule Remove 1 Tablet token from the chaos bag.
+
+lock Alejandro's Trust
+in Heart of the Elders
+rule Add 1 Tablet token to the chaos bag.
+
+lock Beyond the Ruins
+in Heart of the Elders
+neg_rule Jungle locations are not considered to be connected to any locations and vice versa.
+
+lock K'n-yan
+in Heart of the Elders
+neg_rule Investigators may not proceed to part 2.
+
+lock Gasoline
+in Heart of the Elders
+neg_rule Investigators cannot take a mulligan.
+
+lock Map
+in Heart of the Elders
+rule
+The investigators mapped out the way forward (This only puts 1 of the 3 Ruins locations into play).
+You have a map.
+
+
+lock Provisions
+in Heart of the Elders
+neg_rule Each investigator begins the scenario with 3 fewer resources.
+
+lock Poisoned
+in Heart of the Elders
+neg_rule Each investigator begins the scenario with 1 damage.
+
+lock Canteen
+in Heart of the Elders
+rule
+The lead investigator begins the game with 1 clue (from the token bank).
+You have a canteen.
+
+
+lock Binoculars
+in Heart of the Elders
+rule You have binoculars.
+
+lock Compass
+in Heart of the Elders
+rule You have a compass.
+
+lock Chalk
+in Heart of the Elders
+rule You have chalk.
+
+lock Rope
+in Heart of the Elders
+rule You have rope.
+
+scenario The City of Archives
+in The Forgotten Age
+level 15
+locations 04245 04246 04247 04248 04249 04250 04252 04253 04254 04255
+begin 04245 04246 04247 04248 04249 04250
+path 04248 04252 04253 04254 04255 requires Restricted Access
+special 04246
+name Interviewed a subject
+special 04251 requires Restricted Access
+name Found the process
+special 04252 requires Restricted Access
+name Realized what year it is
+special 04253 requires Restricted Access
+name Activated the device
+special 04254 requires Restricted Access
+name Dissected an organ
+special 04256 requires Restricted Access
+description Take control of The Custodian
+enemy 01177 2
+
+lock Restricted Access
+in The City of Archives
+neg_rule The act cannot advance.
+
+lock Ichtaca's Trust
+in The City of Archives
+neg_rule Remove 1 Cultist token from the chaos bag.
+
+lock Ichtaca's Tale
+in The City of Archives
+rule Add 1 Cultist token to the chaos bag.
+
+lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored
+in The City of Archives
+rule Add 1 Cultist token to the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in The City of Archives
+neg_rule Remove 1 Tablet token from the chaos bag.
+
+lock Alejandro's Trust
+in The City of Archives
+rule Add 1 Tablet token to the chaos bag.
+
+lock Pendant
+in The City of Archives
+rule You have a pendant.
+
+scenario The Depths of Yoth
+in The Forgotten Age
+level 18
+always The Harbinger is still alive (0).
+locations 04286 04287 04288 04289 04290 04291 04292 04293 04294 04295
+begin 04286 04287 04288 04289 04290 04291 04292 04293 04294 04295
+enemy 04084
+enemy 04296
+enemy 04298
+special 04285
+name Depth 2
+description Reach depth 2
+special 04285
+name Depth 3
+description Reach depth 3
+special 04285
+name Depth 4
+description Reach depth 4
+special 04285
+name Depth 5
+description Reach depth 5
+
+lock Ichtaca's Trust
+in The City of Archives
+neg_rule Remove 1 Cultist token from the chaos bag.
+
+lock Ichtaca's Tale
+in The City of Archives
+rule Add 1 Cultist token to the chaos bag.
+
+lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored
+in The City of Archives
+rule Add 1 Cultist token to the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in The City of Archives
+neg_rule Remove 1 Tablet token from the chaos bag.
+
+lock Alejandro's Trust
+in The City of Archives
+rule Add 1 Tablet token to the chaos bag.
+
+lock A Mind Recovered
+in The City of Archives
+rule Add 1 Tablet token to the chaos bag.
+
+lock The process was successful
+in The City of Archives
+neg_rule You must use the Body of a Yithian investigator card for this scenario.
+
+lock Chalk
+in The City of Archives
+neg_rule Investigators cannot take a mulligan.
+
+lock Provisions
+in The City of Archives
+neg_rule Each investigator begins the scenario with 3 fewer resources.
+
+lock Poisoned
+in The City of Archives
+neg_rule Each investigator begins the scenario with 1 damage.
+
+lock Blanket
+in The City of Archives
+neg_rule Each investigator begins the scenario with 1 damage and 1 horror.
+
+lock Canteen
+in The City of Archives
+rule You have a canteen.
+
+lock Rope
+in The City of Archives
+rule You have rope.
+
+lock Pickaxe
+in The City of Archives
+rule You have pickaxe.
+
+lock Binoculars
+in The City of Archives
+rule You have binoculars.
+
+lock Map
+in The City of Archives
+rule You have map.
+
+lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored | Pocketknife
+in The City of Archives
+neg_rule If any investigator deck contains Relic of Ages, remove it.
+rule If any investigator deck contains Relic of Ages, replace it with Relic of Ages (Forestalling the future).
+
+scenario Shattered Aeons
+in The Forgotten Age
+level 18
+always
+Do not select any of the 3 options listed in the Standalone Mode setup instructions.
+Always gather both the Dark Cult and the Agents of Yig encounter sets.
+You cannot Parley with Ichtaca or Alejandro Vela.
+
+locations 04324 04327 04328 04329 04330 04331 04332 04333 04334 04335 04336
+begin 04324 04327 04328 04329 04330
+path 04330 04331 04332 04333 04334 04335 04336 requires Gateways to Other Times
+enemy 04084
+enemy 04337
+enemy 04325
+enemy 04326
+special 04321
+name Resolution 1
+goal
+
+lock Gateways to Other Times
+in Shattered Aeons
+neg_rule Shattered locations are not considered to be connected to any locations and vice versa.
+
+lock Ichtaca's Trust
+in Shattered Aeons
+rule Add 1 Cultist token to the chaos bag.
+
+lock Ichtaca's Tale
+in Shattered Aeons
+rule Add 1 Cultist token to the chaos bag.
+
+lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored
+in Shattered Aeons
+rule Add 1 Cultist token to the chaos bag.
+
+lock Alejandro Vela (Renowned Historian)
+in Shattered Aeons
+rule Add 1 Tablet token to the chaos bag.
+
+lock Alejandro's Trust
+in Shattered Aeons
+rule Add 1 Tablet token to the chaos bag.
+
+lock A Mind Recovered
+in Shattered Aeons
+rule Add 1 Tablet token to the chaos bag.
+
+lock Torches
+in Shattered Aeons
+rule The braziers are lit.
+neg_rule The braziers remain unlit.
+
+lock Relic of Ages (…A Device, of Some Sort) & Ichtaca's Trust & Ichtaca's Tale & Faith Restored | Relic of Ages (…A Device, of Some Sort) & Pocketknife
+in Shattered Aeons
+neg_rule
+If any investigator deck contains Relic of Ages, remove it.
+The relic is missing.
+
+rule
+If any investigator deck contains Relic of Ages, replace it with Relic of Ages (Forestalling the future).
+The investigators found the missing relic.
+
+lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored
+in Shattered Aeons
+rule
+Ichtaca's faith is restored.
+After advancing to act 3b, add the set-aside Ichtaca (Scion of Yig) to the victory display.
+
+neg_rule Ichtaca is set against you.
+
+lock Alejandro Vela (Renowned Historian) & Alejandro's Trust & A Mind Recovered
+in Shattered Aeons
+rule
+Alejandro remembers everything.
+After advancing to act 3b, add the set-aside Alejandro (Or, Is He?) to the victory display.
+
+neg_rule Alejandro is set against you.

@@ -68,7 +68,7 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
             for card in &campaign.scenario_cards {
                 let id = 0b0011 << 48 | campaign.i | (card.i64() & 0xfff) << 8;
                 assert_eq!(item_from_id.insert(id, Item::ScenarioCard((campaign.name, *card))), None);
-                let _ = write!(writer, "\"{} - {}\":{id},", campaign.name, cards.get(card).expect("Failed to find card from code").unique_name());
+                let _ = write!(writer, "\"{} - {}\":{id},", campaign.name, cards.get(card).unwrap_or_else(|| panic!("Failed to find card for code: {card}")).unique_name());
             }
 
             for filler in &campaign.filler {
@@ -98,7 +98,7 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
             for uname in &campaign.scenarios_order {
                 let scenario = campaign.scenarios.get_mut(uname).expect("Entry in scenarios_order should be in scenarios");
                 for location in &scenario.locations {
-                    let card = cards.get(location).expect("Failed to find card from code");
+                    let card = cards.get(location).unwrap_or_else(|| panic!("Failed to find card for code: {location}"));
                     for n in 0..card.victory {
                         let id = counts.get(campaign.i | scenario.i << 8 | location.i64() << 16);
                         victory_ids.insert((campaign.name, scenario.name, *location, n), id);

@@ -69,7 +69,7 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
                 scenario_cards: campaign
                     .scenario_cards
                     .iter()
-                    .map(|code| cards.get(code).expect("Failed to find card for code").unique_name())
+                    .map(|code| cards.get(code).unwrap_or_else(|| panic!("Failed to find card for code: {code}")).unique_name())
                     .collect(),
                 filler: campaign
                     .filler
@@ -91,7 +91,7 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
                         .locations
                         .iter()
                         .map(|code| {
-                            let card = cards.get(code).expect("Failed to find card for code");
+                            let card = cards.get(code).unwrap_or_else(|| panic!("Failed to find card for code: {code}"));
                             PyLocation {
                                 name: card.unique_name(),
                                 clues: card.clues,
@@ -99,13 +99,13 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
                             }
                         })
                         .collect(),
-                    begin: scenario.begin.iter().map(|code| cards.get(code).expect("Failed to find card for code").unique_name()).collect(),
+                    begin: scenario.begin.iter().map(|code| cards.get(code).unwrap_or_else(|| panic!("Failed to find card for code: {code}")).unique_name()).collect(),
                     paths: scenario
                         .paths
                         .iter()
                         .map(|path| {
-                            let from_card = cards.get(&path.from).expect("Failed to find card for code");
-                            let to_card = cards.get(&path.to).expect("Failed to find card for code");
+                            let from_card = cards.get(&path.from).unwrap_or_else(|| panic!("Failed to find card for code: {}", path.from));
+                            let to_card = cards.get(&path.to).unwrap_or_else(|| panic!("Failed to find card for code: {}", path.to));
                             PyPath {
                                 origin: from_card.unique_name(),
                                 destination: to_card.unique_name(),
@@ -118,11 +118,8 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
                         .iter()
                         .flat_map(|check| {
                             let mut names = vec![];
-
-                            let card = cards.get(&check.code).expect("Failed to find card from code");
-
-                            if card.victory > 0 {
-                                for victory in 0..card.victory {
+                            if check.victory > 0 {
+                                for victory in 0..check.victory {
                                     if check.count > 1 {
                                         for n in 0..check.count {
                                             names.push(format!("{} - {} Victory {} #{}", scenario.name, check.name, victory + 1, n + 1));

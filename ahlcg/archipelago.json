@@ -1,6 +1,6 @@
 {
   "game": "Arkham Horror The Card Game",
-  "world_version": "0.0.2",
+  "world_version": "0.0.4",
   "authors": ["toto00"],
   "version": 7,
   "compatible_version": 5

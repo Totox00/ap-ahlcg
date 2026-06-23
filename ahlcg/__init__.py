@@ -87,7 +87,7 @@ class AhlcgWorld(World):
                 menu.connect(scenario_region, f"Menu -> {scenario.name}", lambda state, scenario=scenario: state.has(f"{scenario.campaign} - {scenario.name}", self.player) and state.has(f"{scenario.campaign} XP", self.player, self.xp_logic_modifier * scenario.logic_xp))
                 regions = {}
                 for location in scenario.locations:
-                    region = Region(location.name, self.player, self.multiworld)
+                    region = Region(f"{scenario.name} - {location.name}", self.player, self.multiworld)
                     regions[location.name] = region
                     for i in range(0, location.clues):
                         name = f"{scenario.name} - {location.name} Clues {i + 1}"
@@ -99,7 +99,7 @@ class AhlcgWorld(World):
                         self.total_locations += 1
                 self.multiworld.regions.extend(regions.values())
                 for location in scenario.begin:
-                    scenario_region.connect(regions.get(location), f"Menu -> {location}", lambda state: True)
+                    scenario_region.connect(regions.get(location), f"Menu -> {scenario.name} - {location}", lambda state: True)
                 for path in scenario.paths:
                     regions.get(path.origin).connect(regions.get(path.destination), f"{path.origin} -> {path.destination}", lambda state, path=path: path.rule(state, self.player))
                 for check in scenario.checks:

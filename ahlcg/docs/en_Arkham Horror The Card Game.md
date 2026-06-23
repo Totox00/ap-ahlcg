@@ -6,7 +6,7 @@ The [player options page for this game](../player-options) contains all the opti
 
 ## What does randomization do to this game?
 
-Instead of playing campaigns linearly, each scenario is individually unlocked by items, as well as various locks within the scenarios. Follow the Standalone Mode instructions for scenarios, with the chaos bag modified to what it would be at the chosen difficulty, and ignore all resolutions and interludes unless otherwise specified.
+Instead of playing campaigns linearly, each scenario is individually unlocked by items, as well as various locks within the scenarios. Follow the Standalone Mode instructions for scenarios, with the chaos bag modified to what it would be at the chosen difficulty, and ignore all prologues, epilogues, resolutions, and interludes unless otherwise specified.
 Checks are taking clues from locations (locations with more clues have more checks), most sources of victory points, as well as some additional checks which are shown in the client when they are possible.
 To goal a slot you must win a number of campaigns (usually requiring the final scenario unlock and some unlock items).
 
