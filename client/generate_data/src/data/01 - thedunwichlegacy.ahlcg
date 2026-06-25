@@ -89,7 +89,7 @@ path 02127 02132 02133 02134 02135 02136 02137 requires Halls Key
 
 lock Museum Key
 in The Miskatonic Museum
-neg_rule Players 
+neg_rule The act cannot advance.
 rule Reveal the Museum Entrance
 
 lock Halls Key
