@@ -1,41 +1,6 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 use serde_repr::{Deserialize_repr, Serialize_repr};
 use std::collections::HashMap;
-
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(tag = "cmd")]
-pub enum ClientMessage {
-    Connect(Connect),
-    Sync,
-    LocationChecks(LocationChecks),
-    LocationScouts(LocationScouts),
-    StatusUpdate(StatusUpdate),
-    Say(Say),
-    GetDataPackage(GetDataPackage),
-    Bounce(Bounce),
-    Get(Get),
-    Set(Set),
-    SetNotify(SetNotify),
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(tag = "cmd")]
-pub enum ServerMessage {
-    RoomInfo(RoomInfo),
-    ConnectionRefused(ConnectionRefused),
-    Connected(Connected),
-    ReceivedItems(ReceivedItems),
-    LocationInfo(LocationInfo),
-    RoomUpdate(RoomUpdate),
-    Print(Print),
-    PrintJSON(PrintJSON),
-    DataPackage(DataPackage),
-    Bounced(Bounced),
-    InvalidPacket(InvalidPacket),
-    Retrieved(Retrieved),
-    SetReply(SetReply),
-}
 
 #[derive(Debug, Serialize_repr, Deserialize_repr)]
 #[repr(u16)]
@@ -87,95 +52,6 @@ pub struct NetworkSlot {
     pub group_members: Vec<i32>,
 }
 
-// REQUESTS
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Connect {
-    pub password: Option<String>,
-    pub name: String,
-    pub version: NetworkVersion,
-    pub items_handling: Option<i32>,
-    pub tags: Box<[String]>,
-    pub uuid: String,
-    pub game: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ConnectUpdate {
-    pub items_handling: i32,
-    pub tags: Vec<String>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct LocationChecks {
-    pub locations: Vec<i64>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct LocationScouts {
-    pub locations: Vec<i64>,
-    pub create_as_hint: i32,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct StatusUpdate {
-    pub status: ClientStatus,
-}
-
-#[derive(Debug, Serialize_repr, Deserialize_repr)]
-#[repr(u16)]
-pub enum ClientStatus {
-    Unknown = 0,
-    Ready = 10,
-    Playing = 20,
-    Goal = 30,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Say {
-    pub text: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct GetDataPackage {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub games: Option<Box<[String]>>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Bounce {
-    pub games: Option<Vec<String>>,
-    pub slots: Option<Vec<String>>,
-    pub tags: Option<Vec<String>>,
-    pub data: Value,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Get {
-    pub keys: Vec<String>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Set {
-    pub key: String,
-    pub default: Value,
-    pub want_reply: bool,
-    pub operations: Vec<DataStorageOperation>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct DataStorageOperation {
-    pub replace: String, // TODO: enum-ify?
-    pub value: Value,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct SetNotify {
-    pub keys: Vec<String>,
-}
-
-// RESPONSES
-
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RoomInfo {
     pub version: NetworkVersion,
@@ -188,11 +64,6 @@ pub struct RoomInfo {
     pub datapackage_checksums: HashMap<String, String>,
     pub seed_name: String,
     pub time: f32,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ConnectionRefused {
-    pub errors: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -224,41 +95,6 @@ impl TryFrom<RawSlotData> for SlotData {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ReceivedItems {
-    pub index: i32,
-    pub items: Vec<NetworkItem>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct LocationInfo {
-    pub locations: Vec<NetworkItem>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct RoomUpdate {
-    // Copied from RoomInfo
-    pub version: Option<NetworkVersion>,
-    pub tags: Option<Vec<String>>,
-    pub password: Option<bool>,
-    pub permissions: Option<HashMap<String, Permission>>,
-    pub hint_cost: Option<i32>,
-    pub location_check_points: Option<i32>,
-    pub games: Option<Vec<String>>,
-    pub seed_name: Option<String>,
-    pub time: Option<f32>,
-    // Exclusive to RoomUpdate
-    pub hint_points: Option<i32>,
-    pub players: Option<Vec<NetworkPlayer>>,
-    pub checked_locations: Option<Vec<i64>>,
-    pub missing_locations: Option<Vec<i64>>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Print {
-    pub text: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub struct PrintJSON {
     pub data: Vec<JSONMessagePart>,
     pub r#type: Option<String>,
@@ -278,44 +114,7 @@ pub struct JSONMessagePart {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct DataPackage {
-    pub data: DataPackageObject,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct DataPackageObject {
-    pub games: HashMap<String, GameData>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub struct GameData {
     pub item_name_to_id: HashMap<String, i64>,
     pub location_name_to_id: HashMap<String, i64>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Bounced {
-    pub games: Vec<String>,
-    pub slots: Vec<i32>,
-    pub tags: Vec<String>,
-    pub data: Value,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct InvalidPacket {
-    pub r#type: String,
-    pub original_cmd: Option<String>,
-    pub text: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Retrieved {
-    keys: Value,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct SetReply {
-    key: String,
-    value: Value,
-    original_value: Value,
 }
