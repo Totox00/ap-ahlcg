@@ -72,6 +72,25 @@ main {
   font-size: smaller;
 }
 
+.check-card {
+  display: grid;
+  grid-template-areas: "im bt";
+  grid-template-columns: max-content 1fr;
+}
+
+.card-image {
+  grid-area: im;
+}
+
+.card-checks {
+  grid-area: bt;
+}
+
+.card-checks > button {
+  display: block;
+  height: 2rem;
+}
+
 .self,
 .progression {
   color: magenta;

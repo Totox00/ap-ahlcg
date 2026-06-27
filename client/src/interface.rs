@@ -239,7 +239,7 @@ impl Checklist {
 
             let _ = write!(
                 &mut buf,
-                "<div class=\"check-card\"><div class=\"card-header\">{img_str}</div><div class=\"card-checks\">{}</div></div>",
+                "<div class=\"check-card\"><div class=\"card-image\">{img_str}</div><div class=\"card-checks\">{}</div></div>",
                 checks.into_iter().map(|(name, id)| format!("<button id=\"{id}\">{name}</button>")).collect::<Vec<_>>().join("")
             );
         }

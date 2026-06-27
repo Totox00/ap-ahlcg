@@ -29,6 +29,16 @@ struct RawCard {
     victory: i64,
 }
 
+#[derive(Debug, Deserialize)]
+struct RawCardOverride {
+    code: String,
+    real_name: Option<String>,
+    subname: Option<String>,
+    image: Option<String>,
+    clues: Option<i64>,
+    victory: Option<i64>,
+}
+
 struct Counter {
     inner: HashMap<String, (Code, bool)>,
 }
@@ -45,7 +55,31 @@ pub fn get_cards() -> Cards {
         cards.insert(card.code, card);
     }
 
-    for code in names.nique() {
+    for r#override in serde_json::from_str::<Vec<RawCardOverride>>(&read_to_string(Path::new(file!()).parent().unwrap().join("card_overrides.json")).expect("Failed to read card_overrides.json file"))
+        .expect("Failed to parse cards.json file")
+    {
+        let Some(card) = cards.get_mut(&Code::from_str(r#override.code.as_str())) else {
+            panic!("Tried to override non-existent card with code {}", r#override.code)
+        };
+
+        if let Some(real_name) = r#override.real_name {
+            card.name = real_name;
+        }
+        if let Some(subname) = r#override.subname {
+            card.subname = subname;
+        }
+        if let Some(image) = r#override.image {
+            card.image = Some(image);
+        }
+        if let Some(clues) = r#override.clues {
+            card.clues = clues;
+        }
+        if let Some(victory) = r#override.victory {
+            card.victory = victory;
+        }
+    }
+
+    for code in names.unique() {
         cards.get_mut(&code).expect("Card does not exist").unique = true;
     }
 
@@ -111,7 +145,7 @@ impl Counter {
         }
     }
 
-    fn nique(&self) -> impl Iterator<Item = Code> {
+    fn unique(&self) -> impl Iterator<Item = Code> {
         self.inner.values().filter(|(_, unique)| *unique).map(|(code, _)| *code)
     }
 }

@@ -173,7 +173,6 @@ function handleEvent(event) {
         printJson(msg);
         break;
       case "ReceivedItems":
-        console.log(msg.items);
         const skip = receivedItemIndex - msg.index;
         session.recieved_items(msg.items.slice(skip).map((item) => BigInt(item.item)));
         receivedItemIndex += msg.items.length - skip;

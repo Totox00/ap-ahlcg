@@ -1,0 +1,297 @@
+campaign The Circle Undone
+xp 40
+cards 05150 05258 05259 05260 05261
+unlock Deeper Into The Woods
+unlock Witches' Circle
+unlock Beyond the Witch House
+unlock Silver Twilight Lounge
+unlock Silver Twilight Sanctum
+unlock Puzzle Box
+unlock The Trap
+unlock Hideous Palace
+unlock Court of the Great Old Ones
+unlock Valentino disappeared into the mist
+unlock Valentino's Trail
+unlock Penny disappeared into the mist
+unlock Penny's Trail
+unlock Gavriella disappeared into the mist
+unlock Gavriella's Trail
+unlock Jerome disappeared into the mist
+unlock Jerome's Trail
+unlock Mesmerizing Flute
+unlock Ritual Components
+unlock Scrap of Torn Shadow
+unlock Gilman's Journal
+unlock Keziah's Formulae
+unlock Worn Crucifix
+unlock Corn Husk Doll
+unlock Wisp of Spectral Mist
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Tablet Chaos Token
+filler -1 -1 -1 -1 Elder Thing Chaos Token
+filler -1 -1 -1 -1 You are being hunted
+filler -4 -4 -4 -4 Heretic unleashed unto Arkham
+
+scenario The Witching Hour
+in The Circle Undone
+locations 01150 01151 01152 01153 01154 01155 05058 05059 05060 05061 05062 05063 05064 05055
+begin 05058 05059 05060 05061 05062 05063 05064
+path 05058 01150 01151 01152 01153 01154 01155 requires Deeper Into The Woods
+path 01150 05055 requires Witches' Circle
+enemy 01179 requires Deeper Into The Woods
+enemy 05088 requires Deeper Into The Woods
+enemy 05057 requires Deeper Into The Woods & Witches' Circle
+
+lock Deeper Into The Woods
+in The Witching Hour
+rule Act 1a may be advanced without spending clues.
+neg_rule The act cannot advance.
+
+lock Witches' Circle
+in The Witching Hour
+neg_rule Investigators cannot enter Witches' Circle.
+
+scenario At Death's Doorstep
+in The Circle Undone
+locations 05075 05077 05080 05081 05082 05083 05084
+begin 05075 05077 05080 05081 05082 05083 05084
+enemy 05085
+enemy 05100
+special 05085
+name Josef's Plan
+
+scenario The Secret Name
+in The Circle Undone
+level 6
+locations 05128 05129 05130 05131 05132 05133 05134 05135 05136 05137 05138 05139 05140 05141 05142
+begin 05128 05129 05130 05131 05132
+path 05132 05133 05134 05135 05136 05137 05138 05139 05140 05141 05142
+special 05148
+description Defeat
+special 05149
+description Defeat
+
+lock Beyond the Witch House
+in The Secret Name
+rule Act 1a may be advanced without spending clues.
+neg_rule The act cannot advance.
+
+scenario Wages of Sin
+in The Circle Undone
+locations 05166 05167 05168
+begin 05166 05167 05168
+special 05178a
+name Banished 1
+special 05178a
+name Banished 2
+special 05178a
+name Banished 3
+special 05178a
+name Banished 4
+
+lock Mesmerizing Flute
+in Wages of Sin
+rule Mesmerizing Flute is listed under "Mementos Discovered".
+
+lock Ritual Components
+in Wages of Sin
+rule Ritual Components is listed under "Mementos Discovered".
+
+lock Scrap of Torn Shadow
+in Wages of Sin
+rule Scrap of Torn Shadow is listed under "Mementos Discovered".
+
+lock Gilman's Journal
+in Wages of Sin
+rule Gilman's Journal is listed under "Mementos Discovered".
+
+lock Keziah's Formulae
+in Wages of Sin
+rule Keziah's Formulae is listed under "Mementos Discovered".
+
+lock Worn Crucifix
+in Wages of Sin
+rule Worn Crucifix is listed under "Mementos Discovered".
+
+lock Corn Husk Doll
+in Wages of Sin
+rule Corn Husk Doll is listed under "Mementos Discovered".
+
+lock Wisp of Spectral Mist
+in Wages of Sin
+rule Wisp of Spectral Mist is listed under "Mementos Discovered".
+
+scenario For the Greater Good
+in The Circle Undone
+level 12
+locations 05204 05205 05206 05207 05208 05209 05210 05211 05212 05213 05214 05215 05216
+begin 05204 05205 05206 05207 05208 05209 05210 05213
+path 05206 05210 05211 05212 requires Silver Twilight Lounge
+path 05213 05214 05215 05216 requires Silver Twilight Sanctum
+enemy 05217 requires Silver Twilight Lounge
+enemy 05217b requires Silver Twilight Sanctum
+enemy 05220
+special 05203 requires Silver Twilight Lounge & Silver Twilight Sanctum
+name Opening the Box
+special 05218 requires Silver Twilight Sanctum
+description Key
+special 05219 requires Silver Twilight Sanctum
+description Key
+special 05227 requires Silver Twilight Lounge
+description Key
+
+lock Silver Twilight Lounge
+in For the Greater Good
+neg_rule Investigators cannot enter the Lounge, Vault, or Library.
+
+lock Silver Twilight Sanctum
+in For the Greater Good
+neg_rule Investigators cannot enter Sanctum locations.
+
+scenario Union and Disillution
+in The Circle Undone
+level 15
+always
+No missing persons are "crossed off".
+The witches' spell was broken.
+
+locations 05249 05250 05251 05252 05253 05254 05255 05256 05257
+begin 05249 05250 05251 05252 05253 05254 05255 05256
+path 05249 05257 requires The Trap
+enemy 05057 requires The Trap
+enemy 05085 requires The Trap
+enemy 05100
+special 05247 requires The Trap
+name Disillution
+special 05248 requires The Trap
+name Union
+
+lock The Trap
+in Union and Disillution
+neg_rule The act cannot advance past act 3a.
+
+lock Puzzle Box
+in Union and Disillution
+rule An investigator adds the Puzzle Box to their deck for this scenario.
+
+lock Valentino disappeared into the mist
+in Union and Disillution
+rule Valentino disappeared into the mist.
+neg_rule Valentino was claimed by spectres.
+
+lock Valentino's Trail
+in Union and Disillution
+rule You are on Valentino's Trail.
+
+lock Penny disappeared into the mist
+in Union and Disillution
+rule Penny disappeared into the mist.
+neg_rule Penny was claimed by spectres.
+
+lock Penny's Trail
+in Union and Disillution
+rule You are on Penny's Trail.
+
+lock Gavriella disappeared into the mist
+in Union and Disillution
+rule Gavriella disappeared into the mist.
+neg_rule Gavriella was claimed by spectres.
+
+lock Gavriella's Trail
+in Union and Disillution
+rule You are on Gavriella's Trail.
+
+lock Jerome disappeared into the mist
+in Union and Disillution
+rule Jerome disappeared into the mist.
+neg_rule Jerome was claimed by spectres.
+
+lock Jerome's Trail
+in Union and Disillution
+rule You are on Jerome's Trail.
+
+scenario In the Clutches of Chaos
+in The Circle Undone
+level 15
+locations 05290 05292 05294 05296 05298 05300 05303 05304
+begin 05290 05292 05294 05296 05298 05300 05303 05304
+enemy 05088
+enemy 05286b
+enemy 05288b
+enemy 05309 2
+enemy 05311 2
+
+scenario Before the Black Throne
+in The Circle Undone
+level 18
+always
+The lead investigator chooses one:
+- You accepted your fate. The lead investigator adds The Tower • XVI and Ace of Rods to their deck for this scenario.
+- You rejected your fate.
+Then read Interlude VI: Twist of Fate.
+
+locations 05332 05333 05334 05335 05336 05337 05338 05339 05340
+begin 05332 05333 05336 05337 05338 05339 05340
+path 05333 05334 requires Hideous Palace
+path 05334 05335 requires Court of the Great Old Ones
+enemy 05088
+special 05331 requires Hideous Palace & Court of the Great Old Ones & Mesmerizing Flute & Ritual Components
+name Resolution 2
+goal
+special 05331 requires Hideous Palace & Court of the Great Old Ones & Scrap of Torn Shadow & Wisp of Spectral Mist
+name Resolution 3
+goal
+special 05331 requires Hideous Palace & Court of the Great Old Ones
+name Resolution 4
+
+lock Hideous Palace
+in Before the Black Throne
+neg_rule The act cannot advance.
+
+lock Court of the Great Old Ones
+in Before the Black Throne
+neg_rule The act cannot advance past act 2a.
+
+lock Mesmerizing Flute
+in Before the Black Throne
+rule Mesmerizing Flute is listed under "Mementos Discovered".
+
+lock Ritual Components
+in Before the Black Throne
+rule Ritual Components is listed under "Mementos Discovered".
+
+lock Scrap of Torn Shadow
+in Before the Black Throne
+rule Scrap of Torn Shadow is listed under "Mementos Discovered".
+
+lock Gilman's Journal
+in Before the Black Throne
+rule Gilman's Journal is listed under "Mementos Discovered".
+
+lock Keziah's Formulae
+in Before the Black Throne
+rule Keziah's Formulae is listed under "Mementos Discovered".
+
+lock Worn Crucifix
+in Before the Black Throne
+rule Worn Crucifix is listed under "Mementos Discovered".
+
+lock Corn Husk Doll
+in Before the Black Throne
+rule Corn Husk Doll is listed under "Mementos Discovered".
+
+lock Wisp of Spectral Mist
+in Before the Black Throne
+rule Wisp of Spectral Mist is listed under "Mementos Discovered".

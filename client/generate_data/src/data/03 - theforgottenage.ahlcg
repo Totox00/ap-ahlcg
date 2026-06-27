@@ -389,71 +389,71 @@ name Depth 5
 description Reach depth 5
 
 lock Ichtaca's Trust
-in The City of Archives
+in The Depths of Yoth
 neg_rule Remove 1 Cultist token from the chaos bag.
 
 lock Ichtaca's Tale
-in The City of Archives
+in The Depths of Yoth
 rule Add 1 Cultist token to the chaos bag.
 
 lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored
-in The City of Archives
+in The Depths of Yoth
 rule Add 1 Cultist token to the chaos bag.
 
 lock Alejandro Vela (Renowned Historian)
-in The City of Archives
+in The Depths of Yoth
 neg_rule Remove 1 Tablet token from the chaos bag.
 
 lock Alejandro's Trust
-in The City of Archives
+in The Depths of Yoth
 rule Add 1 Tablet token to the chaos bag.
 
 lock A Mind Recovered
-in The City of Archives
+in The Depths of Yoth
 rule Add 1 Tablet token to the chaos bag.
 
 lock The process was successful
-in The City of Archives
+in The Depths of Yoth
 neg_rule You must use the Body of a Yithian investigator card for this scenario.
 
 lock Chalk
-in The City of Archives
+in The Depths of Yoth
 neg_rule Investigators cannot take a mulligan.
 
 lock Provisions
-in The City of Archives
+in The Depths of Yoth
 neg_rule Each investigator begins the scenario with 3 fewer resources.
 
 lock Poisoned
-in The City of Archives
+in The Depths of Yoth
 neg_rule Each investigator begins the scenario with 1 damage.
 
 lock Blanket
-in The City of Archives
+in The Depths of Yoth
 neg_rule Each investigator begins the scenario with 1 damage and 1 horror.
 
 lock Canteen
-in The City of Archives
+in The Depths of Yoth
 rule You have a canteen.
 
 lock Rope
-in The City of Archives
+in The Depths of Yoth
 rule You have rope.
 
 lock Pickaxe
-in The City of Archives
+in The Depths of Yoth
 rule You have pickaxe.
 
 lock Binoculars
-in The City of Archives
+in The Depths of Yoth
 rule You have binoculars.
 
 lock Map
-in The City of Archives
+in The Depths of Yoth
 rule You have map.
 
 lock Ichtaca's Trust & Ichtaca's Tale & Faith Restored | Pocketknife
-in The City of Archives
+in The Depths of Yoth
 neg_rule If any investigator deck contains Relic of Ages, remove it.
 rule If any investigator deck contains Relic of Ages, replace it with Relic of Ages (Forestalling the future).
 
@@ -472,7 +472,7 @@ enemy 04084
 enemy 04337
 enemy 04325
 enemy 04326
-special 04321
+special 04321 requires Gateways to Other Times
 name Resolution 1
 goal
 

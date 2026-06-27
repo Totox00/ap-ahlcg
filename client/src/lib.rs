@@ -5,7 +5,7 @@ mod interface;
 mod protocol;
 mod state;
 
-use data::{get_campaign, get_scenario, item_from_id};
+use data::{get_campaign, get_scenario, is_goal_location, item_from_id};
 use datapackage::DatapackageStore;
 use format_json::format;
 use interface::Interface;
@@ -101,21 +101,17 @@ impl Session {
             if let Some(scenario) = get_scenario(target.split_at(9).1) {
                 self.interface.select_scenario(&mut self.state, scenario.name);
             }
-        } else if target.starts_with("goal-") {
-            if let Ok(id) = target.split_at(5).1.parse::<i64>()
-                && self.state.is_unsent(id)
-            {
-                self.state.mark_sent(id);
-                self.state.complete_campaign(self.interface.selected_campaign);
-                self.interface.update_campaigns(&self.state);
-                self.interface.update_goal(&self.state);
-                self.interface.update_active_scenario(&self.state);
-                return Action { locations: vec![id], victory: false };
-            }
         } else if let Ok(id) = target.parse::<i64>()
             && self.state.is_unsent(id)
         {
             self.state.mark_sent(id);
+
+            if let Some(campaign) = is_goal_location(id) {
+                self.state.complete_campaign(campaign);
+                self.interface.update_campaigns(&self.state);
+                self.interface.update_goal(&self.state);
+            }
+
             self.interface.update_active_scenario(&self.state);
             return Action { locations: vec![id], victory: false };
         }

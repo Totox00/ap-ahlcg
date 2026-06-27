@@ -54,7 +54,7 @@ enemy 02087
 
 lock "Jazz" Mulligan
 in Extracurricular Activity
-neg_rule The act may not be advanced
+neg_rule The act cannot advance.
 
 lock Experiment Weakness
 in Extracurricular Activity

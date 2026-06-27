@@ -36,6 +36,7 @@ filler -1 -1 -2 -2 Skull Chaos Token
 filler -1 -1 -1 -1 Cultist/Tablet/Elder Thing Chaos Token
 filler -1 -1 -1 -1 Heed the Warning
 filler -1 -1 -1 -1 Madness/Pact/Cultist/Detective Basic Weakness
+filler 1 1 1 1 You fled the dinner party
 
 scenario Curtain Call
 in The Path to Carcosa
@@ -103,7 +104,7 @@ enemy 01175 2 requires Asylum Keys
 enemy 03088 requires Asylum Keys
 special 03167 requires Asylum Keys
 name Resign
-special 03182a requires Asylum Keys
+special 03182a requires Asylum Keys & Clasp of Black Onyx
 description Resign with Daniel Chesterfield
 
 lock Clasp of Black Onyx
@@ -129,7 +130,7 @@ level 6
 always Instead of reading Dream 1, skip to Awakening.
 locations 03208 03209 03211 03212 03214 03215 03216 03217 03219 03220
 begin 03208 03209 03212 03214 03217 03219
-path 03208 03211 03215 03216 03220
+path 03208 03211 03215 03216 03220 requires Wider Paris
 enemy 01175 2
 special 03206
 special 03207
@@ -151,7 +152,7 @@ in The Path to Carcosa
 level 12
 locations 03247 03249 03250 03251 03252 03253 03254 03255 03257
 begin 03247 03249 03250 03251 03252 03253 03254 03255 03257
-enemy 03241b
+enemy 03241
 special 03245
 special 03246
 
@@ -211,14 +212,14 @@ begin 03325 03326a 03327a 03328a 03329a 03330 03331
 enemy 01175 2
 enemy 03088
 enemy 03099
-special 03324
-name Resolution 1 requires The Secret
+special 03324 requires The Secret
+name Resolution 1
 goal
-special 03324
-name Resolution 2 requires The Secret
+special 03324 requires The Secret
+name Resolution 2
 goal
-special 03324
-name Resolution 3 requires The Secret
+special 03324 requires The Secret
+name Resolution 3
 goal
 
 lock The Secret
