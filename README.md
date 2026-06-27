@@ -1,7 +1,7 @@
 A client for Arkham Horror the Card Game for the Archipelago multiworld randomiser.
 Credits to [archipelago_rs](https://github.com/ryanisaacg/archipelago_rs) by ryanisaacg for the initial protocol implementation <3
 
-**Browser client available [here](https://totox00.github.io/ap-ahlcg-client/index.html)!**
+**Browser client available [here](https://totox00.github.io/ap-ahlcg/index.html)!**
 
 ## Joining a MultiWorld Game
 
