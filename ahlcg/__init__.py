@@ -72,6 +72,12 @@ class AhlcgWorld(World):
         self.xp_logic_modifier = self.options.xp_logic_modifier.value / 100
         self.difficulty = self.options.difficulty.value
 
+        choices = [campaign for campaign in campaigns if campaign not in self.included_campaigns]
+        for _ in range(0, self.options.additional_campaigns.value):
+            choice = self.random.choice(choices)
+            choices.remove(choice)
+            self.included_campaigns.add(choice)
+
         choices = [scenario for scenario in scenarios.values() if scenario.campaign in self.included_campaigns and scenario.logic_xp == 0]
         for _ in range(0, self.starting_scenarios):
             choice = self.random.choice(choices)

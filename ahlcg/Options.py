@@ -7,10 +7,18 @@ from worlds.ahlcg.Data import campaigns, scenarios, investigators
 
 
 class IncludedCampaigns(OptionSet):
-    """All campaigns that will be included"""
+    """Campaigns that are guaranteed to be included"""
     display_name = "Included Campaigns"
     default = frozenset(campaigns.keys())
     valid_keys = campaigns.keys()
+
+
+class AdditionalCampaigns(Range):
+    """Number of additional randomly selected campaigns to add to the included campaigns"""
+    display_name = "Additional Campaigns"
+    range_start = 0
+    range_end = len(campaigns)
+    default = 0
 
 
 class RequiredCampaigns(Range):
@@ -58,6 +66,7 @@ class Difficulty(Choice):
 @dataclass
 class AhlcgOptions(PerGameCommonOptions):
     included_campaigns: IncludedCampaigns
+    additional_campaigns: AdditionalCampaigns
     required_campaigns: RequiredCampaigns
     starting_scenarios: StartingScenarios
     starting_investigators: StartingInvestigators
@@ -66,5 +75,5 @@ class AhlcgOptions(PerGameCommonOptions):
 
 
 ahlcg_option_groups = [
-    OptionGroup("Basic", [IncludedCampaigns, RequiredCampaigns, StartingScenarios, StartingInvestigators, XpLogicModifier, Difficulty]),
+    OptionGroup("Basic", [IncludedCampaigns, AdditionalCampaigns, RequiredCampaigns, StartingScenarios, StartingInvestigators, XpLogicModifier, Difficulty]),
 ]
