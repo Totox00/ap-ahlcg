@@ -7,6 +7,20 @@ main {
   grid-template-rows: 1fr 4rem;
 }
 
+@media (width < 1400px) {
+  main {
+    display: block;
+  }
+
+  #msg-buffer {
+    display: none;
+  }
+
+  #buttons {
+    height: 4rem;
+  }
+}
+
 #campaign-col {
   grid-area: cc;
   overflow-y: scroll;
