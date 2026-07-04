@@ -99,7 +99,11 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
                             }
                         })
                         .collect(),
-                    begin: scenario.begin.iter().map(|code| cards.get(code).unwrap_or_else(|| panic!("Failed to find card for code: {code}")).unique_name()).collect(),
+                    begin: scenario
+                        .begin
+                        .iter()
+                        .map(|code| cards.get(code).unwrap_or_else(|| panic!("Failed to find card for code: {code}")).unique_name())
+                        .collect(),
                     paths: scenario
                         .paths
                         .iter()
@@ -202,6 +206,14 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
             );
         }
 
-        let _ = writeln!(writer, "}}");
+        let _ = write!(writer, "}}\ninvestigators=[");
+
+        for card in cards.values() {
+            if card.type_code == "investigator" {
+                let _ = write!(writer, "\"{}{}\",", card.name, if let Some(faction) = card.faction { format!(" ({faction})") } else { String::new() });
+            }
+        }
+
+        let _ = writeln!(writer, "]");
     }
 }

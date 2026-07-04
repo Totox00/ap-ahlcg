@@ -2,9 +2,9 @@ main {
   width: 100%;
   height: 60vh;
   display: grid;
-  grid-template-areas: "cc sc as ar" "bt bt as ar";
+  grid-template-areas: "ic cc as ar" "ic sc as ar" "bt bt as ar";
   grid-template-columns: 1fr 1fr 2fr 1fr;
-  grid-template-rows: 1fr 4rem;
+  grid-template-rows: 1fr 1fr 4rem;
 }
 
 @media (width < 1400px) {
@@ -31,8 +31,14 @@ main {
   overflow-y: scroll;
 }
 
+#investigator-col {
+  grid-area: ic;
+  overflow-y: scroll;
+}
+
 #campaign-col > li,
-#scenario-col > li {
+#scenario-col > li,
+#investigator-col > li {
   list-style-type: none;
 }
 

@@ -11,6 +11,7 @@ pub struct State {
     unsent_locations: HashSet<i64>,
     campaigns: HashMap<&'static str, CampaignState>,
     scenarios: HashMap<&'static str, HashSet<Code>>,
+    pub investigators: Vec<&'static str>,
     pub slot_data: SlotData,
     empty_set: HashSet<Code>,
 }
@@ -31,6 +32,7 @@ impl State {
             unsent_locations: HashSet::from_iter(missing_locations.iter().copied()),
             campaigns: HashMap::new(),
             scenarios: HashMap::new(),
+            investigators: vec![],
             slot_data,
             empty_set: HashSet::new(),
         };
@@ -105,7 +107,21 @@ impl State {
     }
 
     pub fn add_item(&mut self, item: Item) {
-        let (campaign, item) = item.split();
+        if let Item::Investigator(investigator) = item {
+            for i in 0..self.investigators.len() {
+                if self.investigators[i] > investigator {
+                    self.investigators.insert(i, investigator);
+                    return;
+                }
+            }
+
+            self.investigators.push(investigator);
+            return;
+        }
+
+        let Some((campaign, item)) = item.split() else {
+            return;
+        };
         let campaign_state = self.campaign_state(campaign);
 
         let mut update_reachable = false;

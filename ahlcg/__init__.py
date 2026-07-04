@@ -10,7 +10,7 @@ from worlds.AutoWorld import World, WebWorld
 from .Items import AhlcgItem
 from .Locations import AhlcgLocation
 from .Options import AhlcgOptions, ahlcg_option_groups
-from .Data import campaigns, scenarios
+from .Data import campaigns, scenarios, investigators
 from .Id import item_name_to_id, location_name_to_id
 
 
@@ -45,9 +45,11 @@ class AhlcgWorld(World):
     included_campaigns: Set[str]
     required_campaigns: int
     starting_scenarios: int
+    starting_investigators: int
     xp_logic_modifier: float
     difficulty: int
 
+    remaining_investigators: list[str]
     total_locations: int
     total_items: int
 
@@ -66,6 +68,7 @@ class AhlcgWorld(World):
         self.included_campaigns = self.options.included_campaigns.value
         self.required_campaigns = self.options.required_campaigns.value
         self.starting_scenarios = self.options.starting_scenarios.value
+        self.starting_investigators = self.options.starting_investigators.value
         self.xp_logic_modifier = self.options.xp_logic_modifier.value / 100
         self.difficulty = self.options.difficulty.value
 
@@ -75,6 +78,12 @@ class AhlcgWorld(World):
             choices.remove(choice)
             name = f"{choice.campaign} - {choice.name}"
             self.multiworld.push_precollected(AhlcgItem(self.player, name, item_name_to_id[name], ItemClassification.progression))
+
+        self.remaining_investigators = [investigator for investigator in investigators]
+        for _ in range(0, self.starting_investigators):
+            choice = self.random.choice(self.remaining_investigators)
+            self.remaining_investigators.remove(choice)
+            self.multiworld.push_precollected(AhlcgItem(self.player, choice, item_name_to_id[choice], ItemClassification.useful))
 
     def create_regions(self):
         menu = Region("Menu", self.player, self.multiworld)
@@ -129,6 +138,9 @@ class AhlcgWorld(World):
                     classification = ItemClassification.trap if filler.trap & (1 << self.difficulty) > 0 else ItemClassification.filler
                     for _ in range(0, filler.quantity[self.difficulty]):
                         items.append(AhlcgItem(self.player, name, code, classification))
+        
+        for investigator in self.remaining_investigators:
+            items.append(AhlcgItem(self.player, investigator, item_name_to_id[investigator], ItemClassification.useful))
         
         choices = [campaign for campaign in campaigns.values() if campaign.name in self.included_campaigns]
         while self.total_locations > len(items):

@@ -2,13 +2,17 @@ use std::{collections::HashMap, fmt::Write};
 
 use ustr::Ustr;
 
-use crate::id_py::{Item, Location};
+use crate::id_py::{
+    Item::{self},
+    Location,
+};
 
 pub fn push_item_from_id<T: Write>(writer: &mut T, item_from_id: &HashMap<i64, Item>) {
     let _ = writeln!(writer, "pub fn item_from_id(id: i64) -> Option<Item> {{\n  match id {{");
 
     for (id, item) in item_from_id {
         let _ = match item {
+            Item::Investigator(investigator) => writeln!(writer, "    {id} => Some(Item::Investigator(\"{investigator}\")),"),
             Item::Unlock((campaign, unlock)) => writeln!(writer, "    {id} => Some(Item::Unlock((\"{campaign}\", \"{unlock}\"))),"),
             Item::ScenarioUnlock((campaign, scenario)) => writeln!(writer, "    {id} => Some(Item::ScenarioUnlock((\"{campaign}\", \"{scenario}\"))),"),
             Item::Xp((campaign, xp)) => writeln!(writer, "    {id} => Some(Item::Xp((\"{campaign}\", {xp}))),"),

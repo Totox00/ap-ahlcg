@@ -8,6 +8,7 @@ use cardcode::Code;
 use web_sys::{Element, window};
 
 pub struct Interface {
+    investigators: Element,
     campaigns: Element,
     scenarios: Element,
     active_scenario: Element,
@@ -23,6 +24,7 @@ impl Interface {
             && let Some(document) = window.document()
         {
             return Interface {
+                investigators: document.get_element_by_id("investigator-col").expect("Failed to get investigator-col element"),
                 campaigns: document.get_element_by_id("campaign-col").expect("Failed to get campaign-col element"),
                 scenarios: document.get_element_by_id("scenario-col").expect("Failed to get scenario-col element"),
                 active_scenario: document.get_element_by_id("active-scenario").expect("Failed to get active-scenario element"),
@@ -89,6 +91,16 @@ impl Interface {
         }
 
         self.scenarios.set_inner_html(&buf);
+    }
+
+    pub fn update_investigators(&self, state: &State) {
+        let mut buf = String::new();
+
+        for investigator in &state.investigators {
+            let _ = write!(&mut buf, "<li class=\"investigator\">{investigator}</li>",);
+        }
+
+        self.investigators.set_inner_html(&buf);
     }
 
     pub fn update_active_scenario(&self, state: &State) {

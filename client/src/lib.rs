@@ -14,7 +14,7 @@ use serde_json::from_str;
 use std::collections::HashMap;
 use wasm_bindgen::prelude::wasm_bindgen;
 
-use crate::state::State;
+use crate::{data::Item, state::State};
 
 #[wasm_bindgen]
 pub struct Session {
@@ -119,13 +119,27 @@ impl Session {
     }
 
     pub fn recieved_items(&mut self, items: Vec<i64>) {
+        let mut new_scenario = false;
+        let mut new_investigator = false;
         for item_id in items {
             if let Some(item) = item_from_id(item_id) {
+                match item {
+                    Item::Investigator(_) => new_investigator = true,
+                    Item::ScenarioUnlock(_) => new_scenario = true,
+                    _ => (),
+                }
+
                 self.state.add_item(item);
             }
         }
-        self.interface.update_campaigns(&self.state);
-        self.interface.update_scenarios(&mut self.state);
+
+        if new_investigator {
+            self.interface.update_investigators(&self.state);
+        }
+        if new_scenario {
+            self.interface.update_campaigns(&self.state);
+            self.interface.update_scenarios(&mut self.state);
+        }
         self.interface.update_active_scenario(&self.state);
         self.interface.update_current_rules(&mut self.state);
     }

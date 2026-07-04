@@ -1,12 +1,15 @@
 use cardcode::Code;
 use serde::Deserialize;
 use std::{collections::HashMap, fmt::Write, fs::read_to_string, path::Path};
+use ustr::{Ustr, ustr};
 
 pub type Cards = HashMap<Code, Card>;
 
 #[derive(Debug)]
 pub struct Card {
     pub code: Code,
+    pub type_code: Ustr,
+    pub faction: Option<Ustr>,
     pub name: String,
     pub subname: String,
     pub image: Option<String>,
@@ -18,6 +21,8 @@ pub struct Card {
 #[derive(Debug, Deserialize)]
 struct RawCard {
     code: String,
+    type_code: String,
+    faction_name: Option<String>,
     real_name: String,
     #[serde(default)]
     subname: String,
@@ -32,6 +37,8 @@ struct RawCard {
 #[derive(Debug, Deserialize)]
 struct RawCardOverride {
     code: String,
+    type_code: Option<String>,
+    faction_name: Option<String>,
     real_name: Option<String>,
     subname: Option<String>,
     image: Option<String>,
@@ -62,6 +69,12 @@ pub fn get_cards() -> Cards {
             panic!("Tried to override non-existent card with code {}", r#override.code)
         };
 
+        if let Some(type_code) = r#override.type_code {
+            card.type_code = ustr(&type_code);
+        }
+        if let Some(faction_name) = r#override.faction_name {
+            card.faction = Some(ustr(&faction_name));
+        }
         if let Some(real_name) = r#override.real_name {
             card.name = real_name;
         }
@@ -110,6 +123,8 @@ impl Card {
     fn from_raw(raw: RawCard) -> Card {
         Card {
             code: Code::from_str(raw.code.as_str()),
+            type_code: ustr(&raw.type_code),
+            faction: raw.faction_name.map(|faction| ustr(&faction.escape_debug().to_string())),
             name: raw.real_name.escape_debug().to_string(),
             subname: raw.subname.escape_debug().to_string(),
             image: raw.imagesrc.or(raw.backimagesrc).map(|str| str.escape_debug().to_string()),

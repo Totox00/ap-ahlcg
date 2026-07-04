@@ -21,6 +21,7 @@ cfg_select! {
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy, Hash)]
 pub enum Item {
+    Investigator(&'static str),
     Unlock((&'static str, &'static str)),
     ScenarioUnlock((&'static str, &'static str)),
     Xp((&'static str, i64)),
@@ -87,13 +88,14 @@ pub struct Check {
 }
 
 impl Item {
-    pub fn split(self) -> (&'static str, CampaignFreeItem) {
+    pub fn split(self) -> Option<(&'static str, CampaignFreeItem)> {
         match self {
-            Item::Unlock((campaign, v)) => (campaign, CampaignFreeItem::Unlock(v)),
-            Item::ScenarioUnlock((campaign, v)) => (campaign, CampaignFreeItem::ScenarioUnlock(v)),
-            Item::Xp((campaign, v)) => (campaign, CampaignFreeItem::Xp(v)),
-            Item::ScenarioCard((campaign, v)) => (campaign, CampaignFreeItem::ScenarioCard(v)),
-            Item::CampaignFiller((campaign, v)) => (campaign, CampaignFreeItem::CampaignFiller(v)),
+            Item::Investigator(_) => None,
+            Item::Unlock((campaign, v)) => Some((campaign, CampaignFreeItem::Unlock(v))),
+            Item::ScenarioUnlock((campaign, v)) => Some((campaign, CampaignFreeItem::ScenarioUnlock(v))),
+            Item::Xp((campaign, v)) => Some((campaign, CampaignFreeItem::Xp(v))),
+            Item::ScenarioCard((campaign, v)) => Some((campaign, CampaignFreeItem::ScenarioCard(v))),
+            Item::CampaignFiller((campaign, v)) => Some((campaign, CampaignFreeItem::CampaignFiller(v))),
         }
     }
 }

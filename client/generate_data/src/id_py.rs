@@ -6,6 +6,7 @@
 //          scenario card ____0011 00000000 00000000 zzzzzzzz zzzzzzzz zzzzzzzz xxxxxxxx (x: campaign index, z: card code hash)
 //        campaign filler ____0100 nnnnnnnn zzzzzzzz zzzzzzzz zzzzzzzz 00000000 xxxxxxxx (x: campaign index, z: filler name hash, n: hash collision index)
 //        scenario filler ____0101 nnnnnnnn zzzzzzzz zzzzzzzz zzzzzzzz yyyyyyyy xxxxxxxx (x: campaign index, y: scenario index, z: filler name hash, n: hash collision index)
+//           investigator ____1000 00000000 00000000 00000000 zzzzzzzz zzzzzzzz zzzzzzzz (z: card code hash)
 //
 // LOCATIONS                 52   48       40       32       24       16        8
 //                        ____0000 00000000 00000000 00000000 00000000 00000000 00000000
@@ -14,7 +15,7 @@
 use std::{collections::HashMap, fs::OpenOptions, io::Write};
 
 use cardcode::Code;
-use ustr::Ustr;
+use ustr::{Ustr, ustr};
 
 use crate::{Data, card::Cards};
 
@@ -29,6 +30,7 @@ pub type Location = (Ustr, Ustr, Code, i64);
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy, Hash)]
 pub enum Item {
+    Investigator(Ustr),
     Unlock((Ustr, Ustr)),
     ScenarioUnlock((Ustr, Ustr)),
     Xp((Ustr, i64)),
@@ -68,7 +70,12 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
             for card in &campaign.scenario_cards {
                 let id = 0b0011 << 48 | campaign.i | (card.i64() & 0xfff) << 8;
                 assert_eq!(item_from_id.insert(id, Item::ScenarioCard((campaign.name, *card))), None);
-                let _ = write!(writer, "\"{} - {}\":{id},", campaign.name, cards.get(card).unwrap_or_else(|| panic!("Failed to find card for code: {card}")).unique_name());
+                let _ = write!(
+                    writer,
+                    "\"{} - {}\":{id},",
+                    campaign.name,
+                    cards.get(card).unwrap_or_else(|| panic!("Failed to find card for code: {card}")).unique_name()
+                );
             }
 
             for filler in &campaign.filler {
@@ -86,6 +93,15 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
                 let id = 0b0001 << 48 | campaign.i | scenario.i << 8;
                 assert_eq!(item_from_id.insert(id, Item::ScenarioUnlock((campaign.name, scenario.name))), None);
                 let _ = write!(writer, "\"{} - {}\":{id},", campaign.name, scenario.name);
+            }
+        }
+
+        for card in cards.values() {
+            if card.type_code == "investigator" {
+                let name = format!("{}{}", card.name, if let Some(faction) = card.faction { format!(" ({faction})") } else { String::new() });
+                let id = 0b1000 << 48 | card.code.i64();
+                let _ = write!(writer, "\"{name}\":{id},");
+                assert_eq!(item_from_id.insert(id, Item::Investigator(ustr(&name))), None);
             }
         }
 
@@ -150,7 +166,12 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
         let _ = writeln!(writer, "}}");
     }
 
-    Datapackage { item_from_id, clue_ids, victory_ids, goal_locations }
+    Datapackage {
+        item_from_id,
+        clue_ids,
+        victory_ids,
+        goal_locations,
+    }
 }
 
 struct Counter {
