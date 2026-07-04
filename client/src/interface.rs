@@ -74,8 +74,11 @@ impl Interface {
 
     pub fn update_scenarios(&self, state: &mut State) {
         let mut buf = String::new();
+        let Some(scenarios) = state.scenarios(self.selected_campaign) else {
+            return;
+        };
 
-        for scenario in state.scenarios(self.selected_campaign) {
+        for scenario in scenarios {
             let _ = write!(
                 &mut buf,
                 "<li id=\"scenario-{}\" class=\"scenario{}\">{}</li>",

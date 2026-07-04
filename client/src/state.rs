@@ -3,7 +3,7 @@ use std::collections::{HashMap, HashSet};
 use cardcode::Code;
 
 use crate::{
-    data::{CampaignFreeItem, Check, Item, can_follow_path, can_send_location, get_campaign, get_card, get_scenario, is_goal_location},
+    data::{CAMPAIGNS, CampaignFreeItem, Check, Item, can_follow_path, can_send_location, get_campaign, get_card, get_scenario, is_goal_location},
     protocol::SlotData,
 };
 
@@ -65,11 +65,16 @@ impl State {
     }
 
     pub fn campaigns(&self) -> impl Iterator<Item = (&'static str, bool)> {
-        self.campaigns.iter().filter(|(_, state)| !state.scenarios.is_empty()).map(|(name, state)| (*name, state.completed))
+        CAMPAIGNS
+            .iter()
+            .filter_map(|name| self.campaigns.get(name).map(|state| (name, state)))
+            .filter(|(_, state)| !state.scenarios.is_empty())
+            .map(|(name, state)| (*name, state.completed))
     }
 
-    pub fn scenarios(&mut self, campaign: &'static str) -> impl Iterator<Item = &'static str> {
-        self.campaign_state(campaign).scenarios.iter().copied()
+    pub fn scenarios(&mut self, campaign: &'static str) -> Option<impl Iterator<Item = &'static str>> {
+        let state = self.campaign_state(campaign);
+        Some(get_campaign(campaign)?.scenarios.iter().copied().filter(|scenario| state.scenarios.contains(scenario)))
     }
 
     pub fn xp(&mut self, campaign: &'static str) -> i64 {

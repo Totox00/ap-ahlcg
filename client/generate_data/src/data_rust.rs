@@ -2,6 +2,15 @@ use std::fmt::Write;
 
 use crate::Data;
 
+pub fn push_campaigns<T: Write>(writer: &mut T, data: &Data) {
+    let _ = writeln!(
+        writer,
+        "pub const CAMPAIGNS: [&str; {}] = [\"{}\"];",
+        data.campaigns_order.len(),
+        data.campaigns_order.iter().map(|str| str.as_str()).collect::<Vec<_>>().join("\",\"")
+    );
+}
+
 pub fn push_get_campaign<T: Write>(writer: &mut T, data: &Data) {
     let _ = writeln!(writer, "pub fn get_campaign(campaign: &str) -> Option<Campaign> {{\n  match campaign {{");
 

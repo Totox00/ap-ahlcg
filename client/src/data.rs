@@ -3,6 +3,7 @@ use cardcode::Code;
 
 cfg_select! {
     feature = "rust_analyzer" => {
+        pub const CAMPAIGNS: [&str; 5] = ["c1", "c2", "c3", "c4", "c5"];
         pub fn item_from_id(_: i64) -> Option<Item> {unreachable!()}
         pub fn get_card(_: Code) -> Option<Card> {unreachable!()}
         pub fn get_campaign(_: &str) -> Option<Campaign> {unreachable!()}

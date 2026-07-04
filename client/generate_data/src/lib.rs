@@ -17,7 +17,7 @@ use ustr::Ustr;
 
 use crate::{
     card::{get_cards, push_get_card},
-    data_rust::{push_get_campaign, push_get_scenario},
+    data_rust::{push_campaigns, push_get_campaign, push_get_scenario},
     id_mappings::{push_get_clue_id, push_get_victory_id, push_is_goal_location, push_item_from_id},
     logic::{LogicTerm, push_can_follow_path, push_can_send_location},
 };
@@ -103,6 +103,7 @@ pub fn generate_data(_stream: TokenStream) -> TokenStream {
     push_get_clue_id(&mut str, &datapackage.clue_ids);
     push_get_victory_id(&mut str, &datapackage.victory_ids);
     push_get_card(&mut str, &cards);
+    push_campaigns(&mut str, &data);
     push_get_campaign(&mut str, &data);
     push_get_scenario(&mut str, &data);
     push_can_follow_path(&mut str, &data);

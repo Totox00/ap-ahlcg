@@ -2,5 +2,8 @@
   "files.associations": {
     "*.ahlcg": "plaintext"
   },
-  "rust-analyzer.diagnostics.disabled": ["macro-error"]
+  "rust-analyzer.diagnostics.disabled": ["macro-error"],
+  "rust-analyzer.procMacro.ignored": {
+    "generate_data": ["generate_data"]
+  }
 }
