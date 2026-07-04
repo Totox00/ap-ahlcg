@@ -109,6 +109,9 @@ impl State {
     pub fn add_item(&mut self, item: Item) {
         if let Item::Investigator(investigator) = item {
             for i in 0..self.investigators.len() {
+                if self.investigators[i] == investigator {
+                    return;
+                }
                 if self.investigators[i] > investigator {
                     self.investigators.insert(i, investigator);
                     return;

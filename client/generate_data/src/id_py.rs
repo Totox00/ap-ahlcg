@@ -98,7 +98,7 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
 
         for card in cards.values() {
             if card.type_code == "investigator" {
-                let name = format!("{}{}", card.name, if let Some(faction) = card.faction { format!(" ({faction})") } else { String::new() });
+                let name = format!("{}{}", card.full_name(), if let Some(faction) = card.faction { format!(" ({faction})") } else { String::new() });
                 let id = 0b1000 << 48 | card.code.i64();
                 let _ = write!(writer, "\"{name}\":{id},");
                 assert_eq!(item_from_id.insert(id, Item::Investigator(ustr(&name))), None);

@@ -1,7 +1,7 @@
 use ustr::Ustr;
 
 use crate::{Data, LogicTerm, card::Cards};
-use std::{fs::OpenOptions, io::Write};
+use std::{collections::HashSet, fs::OpenOptions, io::Write};
 
 const PREFIX: &str = include_str!("prefix.py");
 
@@ -208,9 +208,14 @@ pub fn generate_data_py(cards: &Cards, data: &Data) {
 
         let _ = write!(writer, "}}\ninvestigators=[");
 
+        let mut added_investigators = HashSet::new();
+
         for card in cards.values() {
-            if card.type_code == "investigator" {
-                let _ = write!(writer, "\"{}{}\",", card.name, if let Some(faction) = card.faction { format!(" ({faction})") } else { String::new() });
+            if card.type_code == "investigator" && !card.is_encounter && !card.is_duplicate && !card.is_bonded {
+                let name = format!("\"{}{}\",", card.full_name(), if let Some(faction) = card.faction { format!(" ({faction})") } else { String::new() });
+                if added_investigators.insert(name.clone()) {
+                    let _ = write!(writer, "{name}");
+                }
             }
         }
 

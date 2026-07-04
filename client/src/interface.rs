@@ -97,7 +97,39 @@ impl Interface {
         let mut buf = String::new();
 
         for investigator in &state.investigators {
-            let _ = write!(&mut buf, "<li class=\"investigator\">{investigator}</li>",);
+            if investigator.ends_with("(Guardian)") {
+                let _ = write!(
+                    &mut buf,
+                    "<li class=\"investigator\"><span class=\"icon icon-guardian\"></span>{}</li>",
+                    investigator.split_at(investigator.len() - 11).0
+                );
+            } else if investigator.ends_with("(Seeker)") {
+                let _ = write!(
+                    &mut buf,
+                    "<li class=\"investigator\"><span class=\"icon icon-seeker\"></span>{}</li>",
+                    investigator.split_at(investigator.len() - 9).0
+                );
+            } else if investigator.ends_with("(Rogue)") {
+                let _ = write!(
+                    &mut buf,
+                    "<li class=\"investigator\"><span class=\"icon icon-rogue\"></span>{}</li>",
+                    investigator.split_at(investigator.len() - 8).0
+                );
+            } else if investigator.ends_with("(Mystic)") {
+                let _ = write!(
+                    &mut buf,
+                    "<li class=\"investigator\"><span class=\"icon icon-mystic\"></span>{}</li>",
+                    investigator.split_at(investigator.len() - 9).0
+                );
+            } else if investigator.ends_with("(Survivor)") {
+                let _ = write!(
+                    &mut buf,
+                    "<li class=\"investigator\"><span class=\"icon icon-survivor\"></span>{}</li>",
+                    investigator.split_at(investigator.len() - 11).0
+                );
+            } else if investigator.ends_with("(Neutral)") {
+                let _ = write!(&mut buf, "<li class=\"investigator\">{}</li>", investigator.split_at(investigator.len() - 9).0);
+            }
         }
 
         self.investigators.set_inner_html(&buf);

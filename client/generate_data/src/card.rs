@@ -16,6 +16,9 @@ pub struct Card {
     pub clues: i64,
     pub victory: i64,
     pub unique: bool,
+    pub is_encounter: bool,
+    pub is_duplicate: bool,
+    pub is_bonded: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -23,15 +26,20 @@ struct RawCard {
     code: String,
     type_code: String,
     faction_name: Option<String>,
+    alternate_of_code: Option<String>,
+    duplicate_of_code: Option<String>,
     real_name: String,
     #[serde(default)]
     subname: String,
+    bonded_to: Option<String>,
     imagesrc: Option<String>,
     backimagesrc: Option<String>,
     #[serde(default)]
     clues: i64,
     #[serde(default)]
     victory: i64,
+    #[serde(default)]
+    spoiler: i64,
 }
 
 #[derive(Debug, Deserialize)]
@@ -44,6 +52,7 @@ struct RawCardOverride {
     image: Option<String>,
     clues: Option<i64>,
     victory: Option<i64>,
+    spoiler: Option<i64>,
 }
 
 struct Counter {
@@ -90,6 +99,9 @@ pub fn get_cards() -> Cards {
         if let Some(victory) = r#override.victory {
             card.victory = victory;
         }
+        if let Some(spoiler) = r#override.spoiler {
+            card.is_encounter = spoiler > 0;
+        }
     }
 
     for code in names.unique() {
@@ -112,7 +124,7 @@ pub fn push_get_card<T: Write>(writer: &mut T, cards: &Cards) {
             if let Some(image) = &card.image { format!("Some(\"{image}\")") } else { String::from("None") },
             card.clues,
             card.victory,
-            card.unique
+            card.unique,
         );
     }
 
@@ -125,12 +137,19 @@ impl Card {
             code: Code::from_str(raw.code.as_str()),
             type_code: ustr(&raw.type_code),
             faction: raw.faction_name.map(|faction| ustr(&faction.escape_debug().to_string())),
-            name: raw.real_name.escape_debug().to_string(),
+            name: if raw.alternate_of_code.is_none() {
+                raw.real_name.escape_debug().to_string()
+            } else {
+                format!("{} (Parallel)", raw.real_name.escape_debug())
+            },
             subname: raw.subname.escape_debug().to_string(),
             image: raw.imagesrc.or(raw.backimagesrc).map(|str| str.escape_debug().to_string()),
             clues: raw.clues,
             victory: raw.victory,
             unique: false,
+            is_encounter: raw.spoiler > 0,
+            is_duplicate: raw.duplicate_of_code.is_some(),
+            is_bonded: raw.bonded_to.is_some(),
         }
     }
 

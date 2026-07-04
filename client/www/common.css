@@ -280,3 +280,30 @@ main {
 .icon-null:before {
     content: "t"
 }
+
+.icon-guardian,.icon-mystic,.icon-seeker,.icon-rogue,.icon-survivor {
+    background-image: url("http://arkhamdb.com/bundles/app/images/factions/guardian.png");
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1px
+}
+
+.icon-mystic {
+    background-image: url("http://arkhamdb.com/bundles/app/images/factions/mystic.png")
+}
+
+.icon-seeker {
+    background-image: url("http://arkhamdb.com/bundles/app/images/factions/seeker.png")
+}
+
+.icon-rogue {
+    background-image: url("http://arkhamdb.com/bundles/app/images/factions/rogue.png")
+}
+
+.icon-survivor {
+    background-image: url("http://arkhamdb.com/bundles/app/images/factions/survivor.png");
+    margin-top: -1px
+}
