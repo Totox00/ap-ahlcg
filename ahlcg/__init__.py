@@ -59,6 +59,19 @@ class AhlcgWorld(World):
     item_name_groups = AhlcgItem.get_item_name_groups(item_name_to_id)
     location_name_groups = AhlcgLocation.get_location_name_groups()
 
+    factorio_pack_names = frozenset({
+        "Cultist", "Mythos", "Occult", "Doomed", "Outer",
+        "Sacrificial", "Extradimensional",
+        "Masked", "Secret", "Tattered",
+        "Elder", "Pnakotic", "Yithian", "Valusian",
+        "Witches'", "Spectral", "Lodge",
+        "Dream", "Webbed",
+        "Deep", "Flood",
+        "Antediluvian", "Uncharted", "Nameless", "Sealed",
+        "Scarlet", "Red-Gloved", "Concealed", "Mimetic",
+        "Transfiguration", "Abyss", "Shattered",
+        "Sleep", "Drowned", "Alien"})
+
     def __init__(self, multiworld: MultiWorld, player: int):
         super().__init__(multiworld, player)
         self.total_items = 0
