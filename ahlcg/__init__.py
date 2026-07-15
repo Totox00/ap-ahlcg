@@ -158,7 +158,11 @@ class AhlcgWorld(World):
                     for _ in range(0, filler.quantity[self.difficulty]):
                         items.append(AhlcgItem(self.player, name, code, classification))
         
+        self.random.shuffle(self.remaining_investigators)
         for investigator in self.remaining_investigators:
+            if len(items) >= self.total_locations:
+                self.multiworld.itempool.extend(items)
+                return
             items.append(AhlcgItem(self.player, investigator, item_name_to_id[investigator], ItemClassification.useful))
         
         choices = [campaign for campaign in campaigns.values() if campaign.name in self.included_campaigns]

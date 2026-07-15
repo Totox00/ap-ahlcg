@@ -90,6 +90,8 @@ neg_rule The act cannot advance.
 
 scenario Wages of Sin
 in The Circle Undone
+level 6
+always You only have the mementos listed below:
 locations 05166 05167 05168
 begin 05166 05167 05168
 special 05178a
