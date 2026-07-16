@@ -4,6 +4,7 @@ cards 05150 05258 05259 05260 05261
 unlock Deeper Into The Woods
 unlock Witches' Circle
 unlock Beyond the Witch House
+unlock The Barrier Between
 unlock Silver Twilight Lounge
 unlock Silver Twilight Sanctum
 unlock Puzzle Box
@@ -94,13 +95,35 @@ level 6
 always You only have the mementos listed below:
 locations 05166 05167 05168
 begin 05166 05167 05168
-special 05178a
+special 05166 requires The Barrier Between
+name Hangman's Brook Spectral Clue 1
+special 05167 requires The Barrier Between
+name Haunted Fields Spectral Clue 1
+special 05168 requires The Barrier Between
+name Abandoned Chapel Spectral Clue 1
+special 05169 requires The Barrier Between
+name The Gallows Spectral Clue 1
+special 05169 requires The Barrier Between
+name The Gallows Spectral Clue 2
+special 05171 requires The Barrier Between
+name Heretics' Graves Spectral Clue 1
+special 05171 requires The Barrier Between
+name Heretics' Graves Spectral Clue 2
+special 05173 requires The Barrier Between
+name Chapel Crypt Spectral Clue 1
+special 05173 requires The Barrier Between
+name Chapel Crypt Spectral Clue 2
+special 05175 requires The Barrier Between
+name Chapel Attic Spectral Clue 1
+special 05175 requires The Barrier Between
+name Chapel Attic Spectral Clue 2
+special 05178a requires The Barrier Between
 name Banished 1
-special 05178a
+special 05178a requires The Barrier Between
 name Banished 2
-special 05178a
+special 05178a requires The Barrier Between
 name Banished 3
-special 05178a
+special 05178a requires The Barrier Between
 name Banished 4
 
 lock Mesmerizing Flute
@@ -134,6 +157,10 @@ rule Corn Husk Doll is listed under "Mementos Discovered".
 lock Wisp of Spectral Mist
 in Wages of Sin
 rule Wisp of Spectral Mist is listed under "Mementos Discovered".
+
+lock The Barrier Between
+in Wages of Sin
+neg_rule Clues cannot be discovered at Spectral locations.
 
 scenario For the Greater Good
 in The Circle Undone
