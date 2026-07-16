@@ -13,10 +13,12 @@ class AhlcgItem(Item):
             code: Optional[int],
             classification: ItemClassification,
             campaign: Optional[str] = None,
-            xp: int = 0):
+            xp: int = 0,
+            also_unlock: Optional[str] = None):
         super().__init__(name, classification, code, player)
         self.campaign = campaign
         self.xp = xp
+        self.also_unlock = also_unlock
 
     @staticmethod
     def get_item_name_groups(item_name_to_id: dict[str, int]) -> dict:

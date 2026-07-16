@@ -58,31 +58,44 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
             for unlock in &campaign.unlocks {
                 let id = unlock_counts.get(campaign.i | (unlock.precomputed_hash() as i64 & 0xffff) << 8);
                 assert_eq!(item_from_id.insert(id, Item::Unlock((campaign.name, *unlock))), None);
-                let _ = write!(writer, "\"{} - {unlock}\":{id},", campaign.name);
+                if data.unique_counts.is_unique(unlock) {
+                    let _ = write!(writer, "\"{unlock}\":{id},");
+                } else {
+                    let _ = write!(writer, "\"{unlock} ({})\":{id},", campaign.name);
+                }
             }
 
             for xp in 1..=10 {
                 let id = 0b0010 << 48 | campaign.i | xp << 8;
                 assert_eq!(item_from_id.insert(id, Item::Xp((campaign.name, xp))), None);
-                let _ = write!(writer, "\"{} - {xp} XP\":{id},", campaign.name);
+                let _ = write!(writer, "\"{xp} XP ({})\":{id},", campaign.name);
             }
 
             for card in &campaign.scenario_cards {
                 let id = 0b0011 << 48 | campaign.i | (card.i64() & 0xfff) << 8;
                 assert_eq!(item_from_id.insert(id, Item::ScenarioCard((campaign.name, *card))), None);
-                let _ = write!(
-                    writer,
-                    "\"{} - {}\":{id},",
-                    campaign.name,
-                    cards.get(card).unwrap_or_else(|| panic!("Failed to find card for code: {card}")).unique_name()
-                );
+                if cards.get(card).is_some_and(|card| data.unique_counts.is_unique(&ustr(&card.name))) {
+                    let _ = write!(writer, "\"{}\":{id},", cards.get(card).unwrap_or_else(|| panic!("Failed to find card for code: {card}")).unique_name());
+                } else {
+                    let _ = write!(
+                        writer,
+                        "\"{} ({})\":{id},",
+                        cards.get(card).unwrap_or_else(|| panic!("Failed to find card for code: {card}")).unique_name(),
+                        campaign.name
+                    );
+                }
             }
 
             for filler in &campaign.filler {
                 let hash_val = filler.name.precomputed_hash() as i64 & 0xfff;
                 let id = filler_counts.get(hash_val) | 0b0100 << 48 | campaign.i;
                 assert_eq!(item_from_id.insert(id, Item::CampaignFiller((campaign.name, filler.name))), None);
-                let _ = write!(writer, "\"{} - {}\":{id},", campaign.name, filler.name);
+
+                if data.unique_counts.is_unique(&filler.name) {
+                    let _ = write!(writer, "\"{}\":{id},", filler.name);
+                } else {
+                    let _ = write!(writer, "\"{} ({})\":{id},", filler.name, campaign.name);
+                }
             }
 
             for scenario in campaign
@@ -92,7 +105,12 @@ pub fn generate_id_py(cards: &Cards, data: &mut Data) -> Datapackage {
             {
                 let id = 0b0001 << 48 | campaign.i | scenario.i << 8;
                 assert_eq!(item_from_id.insert(id, Item::ScenarioUnlock((campaign.name, scenario.name))), None);
-                let _ = write!(writer, "\"{} - {}\":{id},", campaign.name, scenario.name);
+
+                if data.unique_counts.is_unique(&scenario.name) {
+                    let _ = write!(writer, "\"{}\":{id},", scenario.name);
+                } else {
+                    let _ = write!(writer, "\"{} ({})\":{id},", scenario.name, campaign.name);
+                }
             }
         }
 

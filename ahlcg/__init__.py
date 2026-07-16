@@ -95,8 +95,12 @@ class AhlcgWorld(World):
         for _ in range(0, self.starting_scenarios):
             choice = self.random.choice(choices)
             choices.remove(choice)
-            name = f"{choice.campaign} - {choice.name}"
-            self.multiworld.push_precollected(AhlcgItem(self.player, name, item_name_to_id[name], ItemClassification.progression))
+            name = choice.name
+            id = item_name_to_id.get(name, None)
+            if id is None:
+                name = f"{choice.name} ({choice.campaign})"
+                id = item_name_to_id.get(name, None)
+            self.multiworld.push_precollected(AhlcgItem(self.player, name, item_name_to_id.get(name, None), ItemClassification.progression, also_unlock=f"{choice.campaign} - {choice.name}"))
 
         self.remaining_investigators = [investigator for investigator in investigators]
         for _ in range(0, self.starting_investigators):
@@ -145,18 +149,27 @@ class AhlcgWorld(World):
         for campaign in campaigns.values():
             if campaign.name in self.included_campaigns:
                 for item in chain(campaign.scenarios, campaign.unlocks, campaign.scenario_cards):
-                    name = f"{campaign.name} - {item}"
+                    name = item
+                    id = item_name_to_id.get(name, None)
+                    if id is None:
+                        name = f"{item} ({campaign.name})"
+                        id = item_name_to_id.get(name, None)
+
                     if name not in exclude:
-                        items.append(AhlcgItem(self.player, name, item_name_to_id[name], ItemClassification.progression))
+                        items.append(AhlcgItem(self.player, name, id, ItemClassification.progression, also_unlock=f"{campaign.name} - {item}"))
                 for _ in range(0, campaign.xp):
-                    name = f"{campaign.name} - 1 XP"
-                    items.append(AhlcgItem(self.player, name, self.item_name_to_id[name], ItemClassification.progression_deprioritized, campaign.name, 1))
+                    name = f"1 XP ({campaign.name})"
+                    items.append(AhlcgItem(self.player, name, self.item_name_to_id.get(name, None), ItemClassification.progression_deprioritized, campaign.name, 1))
                 for filler in campaign.filler:
-                    name = f"{campaign.name} - {filler.name}"
-                    code = self.item_name_to_id[name]
+                    name = filler.name
+                    id = item_name_to_id.get(name, None)
+                    if id is None:
+                        name = f"{filler.name} ({campaign.name})"
+                        id = item_name_to_id.get(name, None)
+                    code = self.item_name_to_id.get(name, None)
                     classification = ItemClassification.trap if filler.trap & (1 << self.difficulty) > 0 else ItemClassification.filler
                     for _ in range(0, filler.quantity[self.difficulty]):
-                        items.append(AhlcgItem(self.player, name, code, classification))
+                        items.append(AhlcgItem(self.player, name, code, classification, also_unlock=f"{campaign.name} - {filler.name}"))
         
         self.random.shuffle(self.remaining_investigators)
         for investigator in self.remaining_investigators:
@@ -168,8 +181,8 @@ class AhlcgWorld(World):
         choices = [campaign for campaign in campaigns.values() if campaign.name in self.included_campaigns]
         while self.total_locations > len(items):
             campaign = self.random.choice(choices)
-            name = f"{campaign.name} - 1 XP"
-            items.append(AhlcgItem(self.player, name, self.item_name_to_id[name], ItemClassification.useful, campaign.name, 1))
+            name = f"1 XP ({campaign.name})"
+            items.append(AhlcgItem(self.player, name, self.item_name_to_id.get(name, None), ItemClassification.useful, campaign.name, 1))
 
         self.multiworld.itempool.extend(items)
 
@@ -181,13 +194,16 @@ class AhlcgWorld(World):
 
     def get_filler_item_name(self) -> str:
         choices = [campaign for campaign in campaigns.values() if campaign.name in self.included_campaigns]
-        return f"{self.random.choice(choices)} - 1"
+        return f"1 XP ({self.random.choice(choices)})"
 
     def set_rules(self) -> None:
         self.multiworld.completion_condition[self.player] = lambda state: [state.has(f"{campaign} - Goal campaign", self.player) for campaign in self.included_campaigns].count(True) >= self.required_campaigns
 
     def collect(self, state: CollectionState, item: AhlcgItem):
         changed = super().collect(state, item)
+        if item.also_unlock:
+            state.prog_items[self.player][item.also_unlock] += 1
+            changed = True
         if item.campaign:
             state.prog_items[self.player][f"{item.campaign} XP"] += item.xp
             if item.xp > 0:
@@ -196,6 +212,9 @@ class AhlcgWorld(World):
 
     def remove(self, state: CollectionState, item: AhlcgItem):
         changed = super().remove(state, item)
+        if item.also_unlock:
+            state.prog_items[self.player][item.also_unlock] -= 1
+            changed = True
         if item.campaign:
             state.prog_items[self.player][f"{item.campaign} XP"] -= item.xp
             if item.xp > 0:

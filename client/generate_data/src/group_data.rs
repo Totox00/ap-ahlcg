@@ -8,7 +8,7 @@ use std::{
 use cardcode::Code;
 use ustr::{Ustr, ustr};
 
-use crate::{Campaign, Check, Data, Filler, Lock, LogicTerm, Path, Scenario, card::Cards, logic::parse_logic};
+use crate::{Campaign, Check, Counter, Data, Filler, Lock, LogicTerm, Path, Scenario, card::Cards, logic::parse_logic};
 
 #[derive(Default)]
 struct Fields {
@@ -41,6 +41,7 @@ enum DataType {
 pub fn group_data(cards: &Cards) -> Data {
     let mut campaigns = HashMap::new();
     let mut campaigns_order = vec![];
+    let mut unique_counts = Counter::new();
 
     let mut campaign_lookup = HashMap::new();
 
@@ -167,9 +168,17 @@ pub fn group_data(cards: &Cards) -> Data {
                         .description = value.escape_debug().to_string()
                 }
                 "name" => current.checks.last_mut().unwrap_or_else(|| panic!("Nothing to add a name to on line {i} in file {file:?}")).name = value.escape_debug().to_string(),
-                "cards" => current.cards = value.split(' ').map(Code::from_str).collect(),
+                "cards" => {
+                    current.cards = value.split(' ').map(Code::from_str).collect();
+                    for code in &current.cards {
+                        let Some(card) = cards.get(code) else { panic!("Failed to find card with code {code}") };
+                        unique_counts.add(ustr(&card.name), ());
+                    }
+                }
                 "unlock" => {
-                    current.unlocks.push(ustr(&value.escape_debug().to_string()));
+                    let name = ustr(&value.escape_debug().to_string());
+                    current.unlocks.push(name);
+                    unique_counts.add(name, ());
                 }
                 "filler" => {
                     let (easy, rest) = value.split_once(' ').unwrap_or_else(|| panic!("Filler is missing standard quantity on line {i} in file {file:?}"));
@@ -191,7 +200,9 @@ pub fn group_data(cards: &Cards) -> Data {
                             .unwrap_or_else(|err| panic!("Failed to parse quantity for difficulty {idx} on line {i} in file {file:?}: {err:?}"))
                     }
 
-                    current.filler.push(Filler { name: ustr(name), trap, quantity })
+                    let name = ustr(name);
+                    current.filler.push(Filler { name, trap, quantity });
+                    unique_counts.add(name, ());
                 }
                 _ => panic!("Unrecognised field {field} at line {i} in file {file:?}"),
             }
@@ -272,6 +283,7 @@ pub fn group_data(cards: &Cards) -> Data {
                                 },
                             );
                             parent.scenarios_order.push(uname);
+                            unique_counts.add(uname, ());
                         }
                         DataType::Lock => {
                             let uname = current.uname.expect("Unlocks should always have unames");
@@ -302,5 +314,9 @@ pub fn group_data(cards: &Cards) -> Data {
         }
     }
 
-    Data { campaigns, campaigns_order }
+    Data {
+        campaigns,
+        campaigns_order,
+        unique_counts,
+    }
 }

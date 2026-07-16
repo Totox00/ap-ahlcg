@@ -1,4 +1,5 @@
 mod card;
+mod counter;
 mod data_py;
 mod data_rust;
 mod group_data;
@@ -16,16 +17,14 @@ use proc_macro::TokenStream;
 use ustr::Ustr;
 
 use crate::{
-    card::{get_cards, push_get_card},
-    data_rust::{push_campaigns, push_get_campaign, push_get_scenario},
-    id_mappings::{push_get_clue_id, push_get_victory_id, push_is_goal_location, push_item_from_id},
-    logic::{LogicTerm, push_can_follow_path, push_can_send_location},
+    card::{get_cards, push_get_card}, counter::Counter, data_rust::{push_campaigns, push_get_campaign, push_get_scenario}, id_mappings::{push_get_clue_id, push_get_victory_id, push_is_goal_location, push_item_from_id}, logic::{LogicTerm, push_can_follow_path, push_can_send_location}
 };
 
 #[derive(Debug)]
 struct Data {
     pub campaigns: HashMap<Ustr, Campaign>,
     pub campaigns_order: Vec<Ustr>,
+    pub unique_counts: Counter<Ustr, ()>,
 }
 
 #[derive(Debug)]

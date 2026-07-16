@@ -3,6 +3,8 @@ use serde::Deserialize;
 use std::{collections::HashMap, fmt::Write, fs::read_to_string, path::Path};
 use ustr::{Ustr, ustr};
 
+use crate::counter::Counter;
+
 pub type Cards = HashMap<Code, Card>;
 
 #[derive(Debug)]
@@ -53,10 +55,6 @@ struct RawCardOverride {
     clues: Option<i64>,
     victory: Option<i64>,
     spoiler: Option<i64>,
-}
-
-struct Counter {
-    inner: HashMap<String, (Code, bool)>,
 }
 
 pub fn get_cards() -> Cards {
@@ -163,23 +161,5 @@ impl Card {
         } else {
             format!("{} ({})", self.name, self.subname)
         }
-    }
-}
-
-impl Counter {
-    fn new() -> Counter {
-        Counter { inner: HashMap::new() }
-    }
-
-    fn add(&mut self, name: String, code: Code) {
-        if let Some((_, unique)) = self.inner.get_mut(&name) {
-            *unique = false;
-        } else {
-            self.inner.insert(name, (code, true));
-        }
-    }
-
-    fn unique(&self) -> impl Iterator<Item = Code> {
-        self.inner.values().filter(|(_, unique)| *unique).map(|(code, _)| *code)
     }
 }
