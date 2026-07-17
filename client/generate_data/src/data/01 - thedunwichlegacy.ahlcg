@@ -90,7 +90,7 @@ path 02127 02132 02133 02134 02135 02136 02137 requires Halls Key
 lock Museum Key
 in The Miskatonic Museum
 neg_rule The act cannot advance.
-rule Reveal the Museum Entrance
+rule Reveal the Museum Halls.
 
 lock Halls Key
 in The Miskatonic Museum
@@ -139,7 +139,7 @@ lock Dr. Francis Morgan
 in Blood on the Altar
 neg_rule Dr. Francis Morgan was kidnapped.
 
-lock Dr. Henry Armitage
+lock Dr. Henry Armitage (The Head Librarian)
 in Blood on the Altar
 neg_rule Dr. Henry Armitage was kidnapped.
 
@@ -181,7 +181,7 @@ in Undimensioned and Unseen
 rule Dr. Francis Morgan survived the Dunwich Legacy.
 neg_rule Dr. Francis Morgan is listed under "Sacrificed to Yog-Sothoth".
 
-lock Dr. Henry Armitage
+lock Dr. Henry Armitage (The Head Librarian)
 in Undimensioned and Unseen
 rule Dr. Henry Armitage survived the Dunwich Legacy.
 neg_rule Dr. Henry Armitage is listed under "Sacrificed to Yog-Sothoth".
@@ -239,7 +239,7 @@ lock Dr. Francis Morgan
 in Where Doom Awaits
 neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
 
-lock Dr. Henry Armitage
+lock Dr. Henry Armitage (The Head Librarian)
 in Where Doom Awaits
 neg_rule 1 additional Brood of Yog-Sothoth escaped into the wild.
 
@@ -289,7 +289,7 @@ in Lost in Time and Space
 rule Dr. Francis Morgan survived the Dunwich Legacy.
 neg_rule Dr. Francis Morgan is listed under "Sacrificed to Yog-Sothoth".
 
-lock Dr. Henry Armitage
+lock Dr. Henry Armitage (The Head Librarian)
 in Lost in Time and Space
 rule Dr. Henry Armitage survived the Dunwich Legacy.
 neg_rule Dr. Henry Armitage is listed under "Sacrificed to Yog-Sothoth".

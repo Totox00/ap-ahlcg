@@ -48,7 +48,7 @@ neg_rule Investigators may not enter the Attic or the Cellar.
 lock Barrier Removed
 in The Gathering
 rule Investigators may advance act 2 without spending clues.
-neg_rule Investigators may not advance act 2.
+neg_rule Investigators may not enter the Parlor.
 
 scenario The Midnight Masks
 in Night of the Zealot
