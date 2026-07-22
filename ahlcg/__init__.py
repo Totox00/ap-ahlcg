@@ -67,7 +67,7 @@ class AhlcgWorld(World):
         "Witches'", "Spectral", "Lodge",
         "Dream", "Webbed",
         "Deep", "Flood",
-        "Antediluvian", "Uncharted", "Nameless", "Sealed",
+        "Antediluvian", "Uncharted", "Nameless", "Sealed", "Cyclopean",
         "Scarlet", "Red-Gloved", "Concealed", "Mimetic",
         "Transfiguration", "Abyss", "Shattered",
         "Sleep", "Drowned", "Alien"})
