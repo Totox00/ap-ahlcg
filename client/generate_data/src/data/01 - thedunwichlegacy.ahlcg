@@ -160,7 +160,7 @@ Always set up Broods of Yog-Sothoth as if no names are listed under "Sacrificed 
 
 locations 02243 02244 02247 02248 02250 02252
 begin 02243 02244 02247 02248 02250 02252
-enemy 02255 5
+enemy 02255 5 requires Esoteric Formula
 
 lock Powder of Ibn-Ghazi
 in Undimensioned and Unseen
