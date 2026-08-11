@@ -84,24 +84,28 @@ pub fn group_data(cards: &Cards) -> Data {
                 "always" => current.always = value.escape_debug().to_string(),
                 "rule" => current.rule = value.escape_debug().to_string(),
                 "neg_rule" => current.neg_rule = value.escape_debug().to_string(),
-                "locations" => current.locations = value.split(' ').map(Code::from_str).collect(),
-                "begin" => current.begin = value.split(' ').map(Code::from_str).collect(),
+                "locations" => current.locations = Code::from_list(value).collect(),
+                "begin" => current.begin = Code::from_list(value).collect(),
                 "path" => {
                     let (from, to, logic) = if let Some((codes, logic)) = value.split_once(" requires ") {
-                        let mut iter = codes.split(' ');
+                        let Some((from, to)) = codes.split_once(' ') else {
+                            panic!("Path with no destination on line {i} in file {file:?}")
+                        };
                         (
-                            iter.next().map(Code::from_str),
-                            iter.map(Code::from_str).collect::<Vec<_>>(),
+                            Code::from_str(from),
+                            to,
                             parse_logic(&current.parent.unwrap_or_else(|| panic!("Cannot add logic outside of a campaign on line {i} in file {file:?}")), logic),
                         )
                     } else {
-                        let mut iter = value.split(' ');
-                        (iter.next().map(Code::from_str), iter.map(Code::from_str).collect(), LogicTerm::True)
+                        let Some((from, to)) = value.split_once(' ') else {
+                            panic!("Path with no destination on line {i} in file {file:?}")
+                        };
+                        (Code::from_str(from), to, LogicTerm::True)
                     };
 
-                    for destination in to {
+                    for destination in Code::from_list(to) {
                         current.paths.push(Path {
-                            from: from.unwrap_or_else(|| panic!("Path on line {i} in file {file:?} is missing origin")),
+                            from,
                             to: destination,
                             logic: logic.clone(),
                         });

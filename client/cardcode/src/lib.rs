@@ -1,6 +1,9 @@
 #![feature(ascii_char)]
 
-use std::{cmp::Ordering, fmt::Display};
+use std::{
+    cmp::{Ordering, max, min},
+    fmt::Display,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Code {
@@ -32,6 +35,27 @@ impl Code {
         }
 
         Code { number, letter }
+    }
+
+    pub fn from_range(val: &str) -> Vec<Self> {
+        if let Some((start, end)) = val.split_once('-') {
+            let start = Self::from_str(start);
+            let end = Self::from_str(end);
+
+            if start.letter != end.letter {
+                panic!("Illegal code range");
+            }
+
+            (min(start.number, end.number)..=max(start.number, end.number))
+                .map(|number| Code { number, letter: start.letter })
+                .collect()
+        } else {
+            vec![Self::from_str(val)]
+        }
+    }
+
+    pub fn from_list(val: &str) -> impl Iterator<Item = Self> {
+        val.split(' ').flat_map(Self::from_range)
     }
 
     pub const fn from(val: i64) -> Self {
