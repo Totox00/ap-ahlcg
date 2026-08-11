@@ -1,0 +1,224 @@
+campaign The Dream-Quest
+xp 40
+cards 06059 06233
+unlock Into Enchantment
+unlock Oriab
+unlock Mnar
+unlock Forbidden Lands
+unlock Timeless Realm
+unlock Through the Center
+unlock The Monastery
+unlock Grand Design
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Cultist Chaos Token
+filler -1 -1 -1 -2 Tablet Chaos Token
+filler 1 1 1 0 Elder Thing Chaos Token
+filler 12 12 12 12 Evidence of Kadath
+
+scenario Beyond the Gates of Sleep
+in The Dream-Quest
+locations 06045-06056
+begin 06045-06048
+path 06048 06049-06056 requires Into Enchantment
+enemy 06060 requires Into Enchantment
+enemy 06086 requires Into Enchantment
+special 06057
+special 06058
+
+lock Into Enchantment
+in Beyond the Gates of Sleep
+neg_rule Investigators cannot enter non-Steps locations.
+
+scenario The Search for Kadath
+in The Dream-Quest
+level 6
+locations 06127-06143
+begin 06127-06129
+path 06129 06136-06138 requires Oriab
+path 06129 06130-06132 requires Mnar
+path 06129 06133-06135 requires Forbidden Lands
+path 06129 06139-06143 requires Timeless Realm
+enemy 06086 requires Timeless Realm
+enemy 06145
+enemy 06146 requires Forbidden Lands
+enemy 06147 requires Forbidden Lands
+enemy 06148 requires Mnar
+
+lock Oriab
+in The Search for Kadath
+neg_rule Investigators cannot choose to visit Oriab.
+
+lock Mnar
+in The Search for Kadath
+neg_rule Investigators cannot choose to visit Mnar.
+
+lock Forbidden Lands
+in The Search for Kadath
+neg_rule Investigators cannot choose to visit Forbidden Lands.
+
+lock Timeless Realm
+in The Search for Kadath
+neg_rule Investigators cannot choose to visit Timeless Realm.
+
+scenario Dark Side of the Moon
+in The Dream-Quest
+level 12
+always Each of the investigators was captured.
+locations 06214-06223
+begin 06214-06218
+path 06218 06219-06223 requires Through the Center
+enemy 06226 requires Through the Center
+enemy 06229 2
+special 06225 requires Through the Center
+
+lock Through the Center
+in Dark Side of the Moon
+neg_rule Investigators cannot enter Cave locations.
+rule Investigators do not need to spend clues to advance the act.
+
+lock Randolph Carter (Expert Dreamer)
+in Dark Side of the Moon
+neg_rule Randolph was captured.
+
+scenario Where the Gods Dwell
+in The Dream-Quest
+level 15
+locations 06295-06297 06299-06305
+begin 06295 06296
+path 06296 06297 requires The Monastery
+path 06297 06299-06305 requires The Monastery & Grand Design
+enemy 06086 requires The Monastery & Grand Design
+enemy 06306 requires The Monastery & Grand Design
+enemy 06307 requires The Monastery & Grand Design
+enemy 06308 requires The Monastery & Grand Design
+enemy 06309 requires The Monastery & Grand Design
+enemy 06310 requires The Monastery & Grand Design
+enemy 06311 requires The Monastery
+special 06293 requires The Monastery & Grand Design
+name Resolution 1
+goal
+
+lock The Monastery
+in Where the Gods Dwell
+neg_rule The act cannot advance.
+
+lock Grand Design
+in Where the Gods Dwell
+neg_rule Investigators cannot enter Onyx Gates.
+
+campaign The Web of Dreams
+xp 40
+cards 06079 06189 06275
+unlock A Promising Lead
+unlock Unmarked Tomb
+unlock The Descent
+unlock The Black Expanse
+unlock The Spider Queen
+unlock The Queen's Wrath
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Cultist Chaos Token
+filler 1 1 1 0 Tablet Chaos Token
+filler -1 -1 -1 -2 Elder Thing Chaos Token
+filler -12 -12 -12 -12 Steps of the Bridge
+
+scenario Waking Nightmare
+in The Web of Dreams
+locations 06070-06077
+begin 06070-06073
+path 06072 06074-06077 requires A Promising Lead
+enemy 06084 2
+special 06069 requires A Promising Lead
+name Advance
+
+lock A Promising Lead
+in Waking Nightmare
+neg_rule The act cannot advance.
+
+scenario A Thousand Shapes of Horror
+in The Web of Dreams
+level 6
+locations 06174-06182 06184
+begin 06174-06181
+path 06174 06182 06184 requires Unmarked Tomb
+special 06173 requires Unmarked Tomb
+name Resolution 1
+
+lock Unmarked Tomb
+in A Thousand Shapes of Horror
+neg_rule Investigators cannot enter the Unmarked Tomb.
+rule Put the set-aside Unmarked Tomb location into play.
+
+scenario Point of No Return
+in The Web of Dreams
+level 12
+locations 06053 06254-06262
+begin 06053 06254-06257
+path 06257 06258-06261 requires The Descent
+path 06261 06262 requires The Black Expanse
+enemy 06084 2 requires The Descent & The Black Expanse
+enemy 06267
+enemy 06271 requires The Descent
+special 06253 requires The Descent & The Black Expanse
+name Resolution 1
+
+lock The Descent
+in Point of No Return
+neg_rule Investigators cannot enter Vale locations.
+
+lock The Black Expanse
+in Point of No Return
+neg_rule Investigators cannot enter Depths locations.
+
+lock Randolph Carter (Chained to the Waking World)
+in Point of No Return
+rule Randolph survived the descent.
+neg_rule Randolph did not survive the descent.
+
+scenario Weaver of the Cosmos
+in The Web of Dreams
+level 15
+locations 06340-06345
+begin 06340-06345
+enemy 06346 requires The Spider Queen & The Queen's Wrath
+enemy 06347 4 requires The Spider Queen
+enemy 06084 2
+special 06339 requires The Spider Queen & The Queen's Wrath
+name Resolution 1
+goal
+
+lock The Spider Queen
+in Weaver of the Cosmos
+neg_rule The act cannot advance.
+
+lock The Queen's Wrath
+in Weaver of the Cosmos
+neg_rule The act cannot advance past act 2.
+
+lock Randolph Carter (Chained to the Waking World)
+in Weaver of the Cosmos
+rule Randolph survived the descent.
+neg_rule Randolph did not survive the descent.
