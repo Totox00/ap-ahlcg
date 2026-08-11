@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from schema import Schema, And, Optional, Or
 
-from Options import Toggle, Range, Choice, PerGameCommonOptions, ItemSet, OptionDict, OptionSet, OptionGroup, OptionList
+from Options import Toggle, Range, Choice, PerGameCommonOptions, ItemSet, OptionDict, OptionSet, OptionGroup, OptionList, DefaultOnToggle
 from worlds.ahlcg.Data import campaigns, scenarios, investigators
 
 
@@ -45,6 +45,14 @@ class StartingInvestigators(Range):
     default = 5
 
 
+class UnlockableInvestigators(Range):
+    """The number of investigators that can be unlocked by items in the pool"""
+    display_name = "Unlockable Investigators"
+    range_start = 0
+    range_end = len(investigators)
+    default = len(investigators) - 5
+
+
 class XpLogicModifier(Range):
     """The value all logically expected xp for scenarios will be multiplied with, as percent"""
     display_name = "XP Logic Modifier"
@@ -70,10 +78,11 @@ class AhlcgOptions(PerGameCommonOptions):
     required_campaigns: RequiredCampaigns
     starting_scenarios: StartingScenarios
     starting_investigators: StartingInvestigators
+    unlockable_investigators: UnlockableInvestigators
     xp_logic_modifier: XpLogicModifier
     difficulty: Difficulty
 
 
 ahlcg_option_groups = [
-    OptionGroup("Basic", [IncludedCampaigns, AdditionalCampaigns, RequiredCampaigns, StartingScenarios, StartingInvestigators, XpLogicModifier, Difficulty]),
+    OptionGroup("Basic", [IncludedCampaigns, AdditionalCampaigns, RequiredCampaigns, StartingScenarios, StartingInvestigators, UnlockableInvestigators, XpLogicModifier, Difficulty]),
 ]

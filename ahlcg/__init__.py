@@ -46,6 +46,7 @@ class AhlcgWorld(World):
     required_campaigns: int
     starting_scenarios: int
     starting_investigators: int
+    unlockable_investigators: int
     xp_logic_modifier: float
     difficulty: int
 
@@ -82,6 +83,7 @@ class AhlcgWorld(World):
         self.required_campaigns = self.options.required_campaigns.value
         self.starting_scenarios = self.options.starting_scenarios.value
         self.starting_investigators = self.options.starting_investigators.value
+        self.unlockable_investigators = self.options.unlockable_investigators.value
         self.xp_logic_modifier = self.options.xp_logic_modifier.value / 100
         self.difficulty = self.options.difficulty.value
 
@@ -171,12 +173,17 @@ class AhlcgWorld(World):
                     for _ in range(0, filler.quantity[self.difficulty]):
                         items.append(AhlcgItem(self.player, name, code, classification, also_unlock=f"{campaign.name} - {filler.name}"))
         
-        self.random.shuffle(self.remaining_investigators)
-        for investigator in self.remaining_investigators:
-            if len(items) >= self.total_locations:
-                self.multiworld.itempool.extend(items)
-                return
-            items.append(AhlcgItem(self.player, investigator, item_name_to_id[investigator], ItemClassification.useful))
+        if self.unlockable_investigators > 0:
+            remaining_to_add = self.unlockable_investigators
+            self.random.shuffle(self.remaining_investigators)
+            for investigator in self.remaining_investigators:
+                if len(items) >= self.total_locations:
+                    self.multiworld.itempool.extend(items)
+                    return
+                items.append(AhlcgItem(self.player, investigator, item_name_to_id[investigator], ItemClassification.useful))
+                remaining_to_add -= 1
+                if remaining_to_add == 0:
+                    break
         
         choices = [campaign for campaign in campaigns.values() if campaign.name in self.included_campaigns]
         while self.total_locations > len(items):
