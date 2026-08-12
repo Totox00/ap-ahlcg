@@ -1,0 +1,477 @@
+campaign The Innsmouth Conspiracy
+xp 40
+cards 07082 07083 07151
+unlock The Search
+unlock Central Innsmouth
+unlock Unfathomable Depths
+unlock Sunken Grotto
+unlock Caves Entrance
+unlock Y'ha-nthlei
+unlock Y'ha-nthlei Sanctums
+unlock Y'ha-nthlei Lairs
+unlock A meeting with Thomas Dawson
+unlock A battle with a horrifying devil
+unlock An encounter with a secret cult
+unlock A decision to stick together
+unlock A deal with Joe Sargent
+unlock A Followed Lead
+unlock An intervention
+unlock A Jailbreak
+unlock Discovery of a strange idol
+unlock Discovery of an unholy mantle
+unlock Discovery of a mystical relic
+unlock A conversation with Mr. Moore
+unlock The lifecycle of a "Deep One"
+unlock Map of Y'ha-nthlei
+unlock Key to Y'ha-nthlei
+unlock Diving Suits
+filler -0 -1 -2 -2 Physical Trauma
+filler -0 -1 -2 -2 Mental Trauma
+filler 1 1 0 0 +1 Chaos Token
+filler 1 2 1 0 0 Chaos Token
+filler -2 1 1 0 -1 Chaos Token
+filler -1 -2 2 1 -2 Chaos Token
+filler -1 -1 -1 2 -3 Chaos Token
+filler -0 -1 -1 -1 -4 Chaos Token
+filler -0 -1 -1 -1 -5 Chaos Token
+filler -0 -0 -1 -1 -6 Chaos Token
+filler -0 -0 -0 -1 -7 Chaos Token
+filler -0 -0 -0 -0 -8 Chaos Token
+filler -1 -1 -1 -1 Skull Chaos Token
+filler -1 -1 -1 -1 Cultist Chaos Token
+filler -1 -1 -1 -1 Tablet Chaos Token
+filler -1 -1 -1 -1 Elder Thing Chaos Token
+
+scenario The Pit of Despair
+in The Innsmouth Conspiracy
+always Do not read any flashbacks.
+locations 07047-07052 07102-07104
+begin 07047-07052 07102-07104
+special 07045
+name Flashback I
+special 07046
+name Resolution 1
+special 07048
+name Flashback II
+special 07049
+name Flashback III
+special 07051
+name Flashback IV
+
+lock A battle with a horrifying devil
+in The Pit of Despair
+rule Remove 1 Cultist token from the chaos bag.
+
+lock An encounter with a secret cult
+in The Pit of Despair
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in The Pit of Despair
+rule Remove 1 Elder Thing token from the chaos bag.
+
+scenario The Vanishing of Elina Harper
+in The Innsmouth Conspiracy
+locations 07063-07075
+begin 07063-07069
+path 07069 07070-07075 requires The Search
+enemy 07094
+
+lock The Search
+in The Vanishing of Elina Harper
+neg_rule
+Investigators cannot use the <free> ability of act 1.
+The act cannot advance.
+
+
+lock A battle with a horrifying devil
+in The Vanishing of Elina Harper
+rule Remove 1 Cultist token from the chaos bag.
+
+lock An encounter with a secret cult
+in The Vanishing of Elina Harper
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in The Vanishing of Elina Harper
+rule
+A decision to stick together is listed under "Memories Recovered".
+Remove 1 Elder Thing token from the chaos bag.
+
+
+scenario In Too Deep
+in The Innsmouth Conspiracy
+always Do not read any flashbacks.
+locations 07129-07143
+begin 07131 07132 07136 07138 07141 07143
+path 07143 07129 07130 07133 07134 07135 07137 07139 07140 07142 requires Central Innsmouth
+enemy 07144 requires Central Innsmouth
+special 07128 requires Central Innsmouth
+name Resolution 1
+special 07133 requires Central Innsmouth
+name Flashback VIII
+special 07139 requires Central Innsmouth
+name Flashback V
+special 07130 requires Central Innsmouth
+name Flashback VII
+special 07135 requires Central Innsmouth
+name Flashback VI
+
+lock Central Innsmouth
+in In Too Deep
+neg_rule Investigators cannot enter locations in columns 1, 2, or 3 from the west.
+
+lock A battle with a horrifying devil
+in In Too Deep
+rule Remove 1 Cultist token from the chaos bag.
+
+lock An encounter with a secret cult
+in In Too Deep
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in In Too Deep
+rule Remove 1 Elder Thing token from the chaos bag.
+
+lock A deal with Joe Sargent
+in In Too Deep
+rule Put the set-aside Joe Sargent into play under the control of an investigator.
+
+lock An intervention
+in In Too Deep
+rule Add 1 +1 token to the chaos bag.
+
+lock A Jailbreak
+in In Too Deep
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+scenario Devil Reef
+in The Innsmouth Conspiracy
+level 6
+always Skip the Investigator Setup section of this scenario.
+locations 07102-07104 07174b-07177b
+begin 07102-07104 07174b
+path 07102 07175b-07177b requires Unfathomable Depths
+enemy 07086
+enemy 07164b requires A battle with a horrifying devil
+special 07175b requires Unfathomable Depths
+name Flashback IX
+special 07176b requires Unfathomable Depths
+name Flashback X
+special 07177b requires Unfathomable Depths
+name Flashback XI
+
+lock A battle with a horrifying devil
+in Devil Reef
+rule
+A battle with a horrifying devil is listed under "Memories Recovered".
+Remove 1 Cultist token from the chaos bag.
+
+
+lock An encounter with a secret cult
+in Devil Reef
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in Devil Reef
+rule Remove 1 Elder Thing token from the chaos bag.
+
+lock An intervention
+in Devil Reef
+rule Add 1 +1 token to the chaos bag.
+
+lock A Jailbreak
+in Devil Reef
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+scenario Horror in High Gear
+in The Innsmouth Conspiracy
+level 9
+locations 07204b 07205b 07206a 07207a 07208b 07209a
+begin 07204b 07205b 07206a 07207a 07208b 07209a
+enemy 07094
+
+lock A battle with a horrifying devil
+in Horror in High Gear
+rule Remove 1 Cultist token from the chaos bag.
+
+lock An encounter with a secret cult
+in Horror in High Gear
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in Horror in High Gear
+rule Remove 1 Elder Thing token from the chaos bag.
+
+lock An intervention
+in Horror in High Gear
+rule Add 1 +1 token to the chaos bag.
+
+lock A Jailbreak
+in Horror in High Gear
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+lock Discovery of a strange idol
+in Horror in High Gear
+rule Add 1 Cultist token to the chaos bag.
+
+lock Discovery of an unholy mantle
+in Horror in High Gear
+rule Add 1 Tablet token to the chaos bag.
+
+lock Discovery of a mystical relic
+in Horror in High Gear
+rule Add 1 Elder Thing token to the chaos bag.
+
+scenario A Light in the Fog
+in The Innsmouth Conspiracy
+level 12
+always Do not read any flashbacks.
+locations 07102 07103 07239-07252
+begin 07239-07243 07252
+path 07240 07102 07103 07244-07251 requires Sunken Grotto
+enemy 07253
+special 07242
+name Flashback XII
+special 07248 requires Sunken Grotto
+name Flashback XIII
+special 07249 requires Sunken Grotto
+name Resolution 1
+
+lock Sunken Grotto
+in A Light in the Fog
+neg_rule Investigators cannot enter non-Falcon Point locations.
+
+lock A battle with a horrifying devil
+in A Light in the Fog
+rule Remove 1 Cultist token from the chaos bag.
+
+lock An encounter with a secret cult
+in A Light in the Fog
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in A Light in the Fog
+rule Remove 1 Elder Thing token from the chaos bag.
+
+lock An intervention
+in A Light in the Fog
+rule Add 1 +1 token to the chaos bag.
+
+lock A Jailbreak
+in A Light in the Fog
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+lock Discovery of a strange idol
+in A Light in the Fog
+rule
+The idol was brought to the lighthouse.
+Add 1 Cultist token to the chaos bag.
+
+
+lock Discovery of an unholy mantle
+in A Light in the Fog
+rule
+The mantle was brought to the lighthouse.
+Add 1 Tablet token to the chaos bag.
+
+
+lock Discovery of a mystical relic
+in A Light in the Fog
+rule
+The headdress was brought to the lighthouse.
+Add 1 Elder Thing token to the chaos bag.
+
+
+lock A conversation with Mr. Moore
+in A Light in the Fog
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+lock The lifecycle of a "Deep One"
+in A Light in the Fog
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+scenario The Lair of Dagon
+in The Innsmouth Conspiracy
+level 15
+always Skip the Investigator Setup section of this scenario.
+locations 07102-07104 07283-07291
+begin 07283-07289
+path 07283 07102-07104 07290 07291 requires Caves Entrance
+enemy 07292b requires Caves Entrance
+enemy 07293
+special 07282 requires Caves Entrance
+name Rebirth
+
+lock Caves Entrance
+in The Lair of Dagon
+neg_rule The act cannot advance.
+
+lock A battle with a horrifying devil
+in The Lair of Dagon
+rule
+A battle with a horrifying devil is listed under "Memories Recovered".
+Remove 1 Cultist token from the chaos bag.
+
+
+lock An encounter with a secret cult
+in The Lair of Dagon
+rule
+An encounter with a secret cult is listed under "Memories Recovered".
+Remove 1 Tablet token from the chaos bag.
+
+
+lock A decision to stick together
+in The Lair of Dagon
+rule
+A decision to stick together is listed under "Memories Recovered".
+Remove 1 Elder Thing token from the chaos bag.
+
+
+lock A deal with Joe Sargent
+in The Lair of Dagon
+rule A deal with Joe Sargent is listed under "Memories Recovered".
+
+lock A followed lead
+in The Lair of Dagon
+rule A followed lead is listed under "Memories Recovered".
+
+lock An intervention
+in The Lair of Dagon
+rule
+An intervention is listed under "Memories Recovered".
+Add 1 +1 token to the chaos bag.
+
+
+lock A Jailbreak
+in The Lair of Dagon
+rule
+A Jailbreak is listed under "Memories Recovered".
+Choose a random Suspect to be considered circled under "Possible Suspects".
+Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+
+lock Discovery of a strange idol
+in The Lair of Dagon
+rule
+lock Discovery of a strange idol is listed under "Memories Recovered".
+An investigator may add Waveworn Idol to their deck for this scenario.
+Add 1 Cultist token to the chaos bag.
+
+
+lock Discovery of an unholy mantle
+in The Lair of Dagon
+rule
+lock Discovery of an unholy mantle is listed under "Memories Recovered".
+An investigator may add Awakened Mantle to their deck for this scenario.
+Add 1 Tablet token to the chaos bag.
+
+
+lock Discovery of a mystical relic
+in The Lair of Dagon
+rule
+lock Discovery of a mystical relic is listed under "Memories Recovered".
+An investigator may add Headdress of Y'ha-nthlei to their deck for this scenario.
+Add 1 Elder Thing token to the chaos bag.
+
+
+lock A conversation with Mr. Moore
+in The Lair of Dagon
+rule
+A conversation with Mr. Moore is listed under "Memories Recovered".
+Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+
+lock The lifecycle of a "Deep One"
+in The Lair of Dagon
+rule
+The lifecycle of a "Deep One" is listed under "Memories Recovered".
+Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+
+lock Thomas Dawson
+in The Lair of Dagon
+rule Remove the set-aside Thomas Dawson from the game (because he is already in your deck).
+
+scenario Into the Maelstrom
+in The Innsmouth Conspiracy
+level 18
+always None of the entries in the second instruction of the Standalone Mode instructions are true.
+locations 07102-07104 07319-07329
+begin 07102-07104 07319 07320
+path 07320 07321-07323 requires Y'ha-nthlei
+path 07321 07324-07327 requires Y'ha-nthlei Sanctums
+path 07321 07328 07329 requires Y'ha-nthlei Lairs
+enemy 07086
+special 07316 requires Y'ha-nthlei & Y'ha-nthlei Sanctums
+name Shattering the Alignment
+goal
+special 07317 requires Y'ha-nthlei & Y'ha-nthlei Sanctums & Y'ha-nthlei Lairs
+name Conspiracy Fulfilled
+special 07318 requires Y'ha-nthlei & Y'ha-nthlei Sanctums & Y'ha-nthlei Lairs
+name Conspiracy Dismantled
+
+lock Y'ha-nthlei
+in Into the Maelstrom
+neg_rule The act cannot advance.
+
+lock Y'ha-nthlei Sanctums
+in Into the Maelstrom
+neg_rule Investigators cannot enter Sanctum locations.
+
+lock Y'ha-nthlei Lairs
+in Into the Maelstrom
+neg_rule Investigators cannot enter Lair locations.
+
+lock Diving Suits
+in Into the Maelstrom
+rule Each investigator possesses a diving suit.
+
+lock A battle with a horrifying devil
+in Into the Maelstrom
+rule Remove 1 Cultist token from the chaos bag.
+
+lock An encounter with a secret cult
+in Into the Maelstrom
+rule Remove 1 Tablet token from the chaos bag.
+
+lock A decision to stick together
+in Into the Maelstrom
+rule Remove 1 Elder Thing token from the chaos bag.
+
+lock An intervention
+in Into the Maelstrom
+rule Add 1 +1 token to the chaos bag.
+
+lock A Jailbreak
+in Into the Maelstrom
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+lock Discovery of a strange idol
+in Into the Maelstrom
+rule
+An investigator may add Waveworn Idol to their deck for this scenario.
+Add 1 Cultist token to the chaos bag.
+
+
+lock Discovery of an unholy mantle
+in Into the Maelstrom
+rule
+An investigator may add Awakened Mantle to their deck for this scenario.
+Add 1 Tablet token to the chaos bag.
+
+
+lock Discovery of a mystical relic
+in Into the Maelstrom
+rule
+An investigator may add Headdress of Y'ha-nthlei to their deck for this scenario.
+Add 1 Elder Thing token to the chaos bag.
+
+
+lock A conversation with Mr. Moore
+in Into the Maelstrom
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
+
+lock The lifecycle of a "Deep One"
+in Into the Maelstrom
+rule Choose and remove a Cultist, Tablet, or Elder Thing token from the chaos bag.
