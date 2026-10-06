@@ -2,6 +2,7 @@ from typing import Optional, Callable
 
 from BaseClasses import Location, CollectionState
 
+from .Data import campaigns, scenarios
 
 class AhlcgLocation(Location):
     game: str = "Arkham Horror The Card Game"
@@ -19,4 +20,20 @@ class AhlcgLocation(Location):
 
     @staticmethod
     def get_location_name_groups() -> dict:
-        return {}
+        groups = {
+            **{c: set() for c in campaigns},
+            **{s: set() for s in scenarios}
+        }
+
+        for scenario in scenarios.values():
+            s_group = groups[scenario.name]
+            for location in scenario.locations:
+                for i in range(0, location.clues):
+                    s_group.add(f"{scenario.name} - {location.name} Clues {i + 1}")
+                for i in range(0, location.victory):
+                    s_group.add(f"{scenario.name} - {location.name} Victory {i + 1}")
+            for check in scenario.checks:
+                s_group.add(check.name)
+            groups[scenario.campaign].update(s_group)
+
+        return groups
