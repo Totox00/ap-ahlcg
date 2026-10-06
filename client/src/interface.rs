@@ -209,7 +209,7 @@ impl Interface {
                         let _ = write!(&mut buf, "<p>{}</p>", lock.rule);
                     }
                 } else if !lock.neg_rule.is_empty() {
-                    let _ = write!(&mut buf, "<p>{}</p>", lock.neg_rule);
+                    let _ = write!(&mut buf, "<p>[Lock: {}] {}</p>", lock.name, lock.neg_rule);
                 }
             }
 
